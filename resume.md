@@ -13,18 +13,19 @@
 - Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, LLMs, Git, Node, React, Next, Jest, Puppeteer
 
 ## Work Experience
-### Software Engineer Intern | NimbleRx (YC W15) | Starting May 2026
-- Incoming Platform Team engineer with a focus on AWS optimization, database performance, and internal tooling
+### Software Engineer Intern | NimbleRx (YC W15) | May 2026 -- Aug 2026
+- Built a **Gemini Flash** pipeline that classifies and routes pharmacy feedback to the right product-area owners
+- Shipped NimbleRx's first standalone **Gemini** integration end-to-end, establishing reusable structured-JSON output
+- Built an AI PR-review suite (AST anti-pattern rules, coverage interpreter, PII-logging guard) for every PR
+- Closed an account-enumeration leak in pharmacy login by unifying pre-auth failure responses and hardening CSP
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ hrs/mo** by building AWS infrastructure to automatically process **320K+ emails** using Lambda
 - Automated the collection of **1M+** claims from insurance portals by developing bots using JavaScript & Puppeteer
 - Resolved a **3-year** QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by **20x**
 - Analyzed AWS CloudWatch data to pinpoint and resolve a critical bug, improving data collection reliability by **8x**
-- Built CI/CD pipeline for containerized services using Bitbucket Pipelines, Docker, and Linux shell scripts
 ### AI Consultant | Self-employed | Sep 2024 -- Oct 2024
 - Secured a **$5K** contract with a dental software company to develop AI agents for insurance data management
 - Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by **3.5x**
-- Deployed a full-stack web app (React & Next) to curate feedback from experts and improve AI model accuracy
 ### AI Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
 - Developed an AI agent that creates mobile app prototypes **under 30 min** using a Human-in-the-loop & JavaScript
 - Enabled agent to generate **70%** of its own React Native frontend through autonomous file management using LLMs
@@ -47,7 +48,6 @@
 - Acquired **15K views**, **140+ users**, **400+ submissions**, and **17-min avg sessions** through organic marketing
 ### ChefMate (Hackathon Win) | TypeScript, React, Vite, Vercel, Gemini API, ElevenLabs | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
 - Won the **Best use of ElevenLabs Award** at Hack the Coast by building an AI cooking coach in **24 hours**
-- Deployed mobile web-app on Vercel; utilized ElevenLabs conversational agent and Gemini API
 
 ## Leadership
 ### Program Leader | Shad Canada |
