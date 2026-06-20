@@ -179,7 +179,7 @@ def sectype_for(title):
     t = title.strip().lower()
     if t == 'education':
         return 'subheading'
-    if t in ('personal projects', 'projects'):
+    if t in ('personal projects', 'projects', 'hackathon wins', 'hackathons'):
         return 'project'
     if t == 'skills':
         return 'skills'

@@ -13,7 +13,7 @@
 - Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, LLMs, Git, Node, React, Next, Jest, Puppeteer
 
 ## Work Experience
-### Software Engineer Intern | NimbleRx (YC W15) | May 2026 -- Aug 2026
+### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
 - Built an AI triage pipeline that auto-routes **70%** of customer feedback, saving the team **10+ hrs/week**
 - Shipped an AI agent to review PRs in CI, cutting review time by **30%**
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
@@ -31,21 +31,16 @@
 
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Link](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
-- Launched an AI agent to fact-check resumes with internet sources and hit **1.5K users** within 24 hours
+- Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
 - Built a serverless pipeline to parse, process, and verify resumes using AWS Lambda, S3, and DynamoDB
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
-### Dance CV (Hackathon Win) | TypeScript, React, Vite, OpenCV, MediaPipe, Gemini API | [Devpost](https://devpost.com/software/dance-cv)
-- Won the **Best Game Project Award** at nwHacks (**630+ contestants**) by building an AI dance coach in **12 hours**
-- **Tripled** accuracy by using the min error across neighboring frames (**sliding window**) to account for pose latency
-### ELOv (Hackathon Win) | TypeScript, React, Vite, Vercel, Supabase, Google Analytics, Gemini API, Fetch AI | [Devpost](https://devpost.com/software/elov)
-- Launched a LeetCode-style training ground for users to improve their conversational skills across romantic scenarios
-: \vspace{-12pt}
-- Acquired **15K views**, **140+ users**, **400+ submissions**, and **17-min avg sessions** through organic marketing
-### ChefMate (Hackathon Win) | TypeScript, React, Vite, Vercel, Gemini API, ElevenLabs | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
-- Won the **Best use of ElevenLabs Award** at Hack the Coast by building an AI cooking coach in **24 hours**
+## Hackathon Wins
+### Dance CV | Best Game Project @ nwHacks (630+) -- AI dance coach with a sliding-window pose metric | [Devpost](https://devpost.com/software/dance-cv)
+### ELOv | Hackathon winner -- conversational-skills trainer; 15K views, 140+ users | [Devpost](https://devpost.com/software/elov)
+### ChefMate | Best ElevenLabs @ Hack the Coast -- AI cooking coach built in 24h | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
 
 ## Leadership
 ### Program Leader | Shad Canada |
