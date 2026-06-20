@@ -2,9 +2,11 @@
 
 LaTeX resume.
 
-- **`resume.tex`** — the clean, primary resume. Edit this one.
+- **`resume.md`** — simple Markdown source. The easiest place to edit content.
+- **`resume.tex`** — the clean LaTeX resume (generated-compatible; safe to edit directly too).
 - **`resume-dirty.tex`** — the full archive, same layout but with many alternate bullet
-  phrasings kept around as comments. Mine it for wording, then port changes to `resume.tex`.
+  phrasings kept around as comments. Mine it for wording, then port changes over.
+- **`md2tex.py`** — converts `resume.md` -> LaTeX matching `resume.tex` 1:1.
 
 All generated files (PDF + `.aux`/`.log`/etc.) go into `build/`, configured via
 `.latexmkrc` (`$out_dir = 'build'`). The repo root stays clean — only `.tex` sources
@@ -45,6 +47,38 @@ its output also lands in `build/`.
 - Build: `Cmd+Option+B`
 - Preview PDF: `Cmd+Option+V`
 - It also builds automatically on save.
+
+## Markdown pipeline (`resume.md` -> LaTeX)
+
+`md2tex.py` turns a simple Markdown file into LaTeX that matches `resume.tex`
+(verified pixel-identical). The LaTeX preamble + macros are baked into the script;
+the Markdown only carries content.
+
+```sh
+python3 md2tex.py resume.md           # print LaTeX to stdout
+python3 md2tex.py resume.md resume.tex  # regenerate resume.tex from resume.md
+```
+
+Markdown schema:
+
+```
+# Name                       -> centered name
+- display | url              -> a contact link (one per line, under the name)
+
+## Section                   -> \section{...}
+### a | b | c [| d]          -> entry header; field meaning depends on the section:
+                                  Education          -> org | location | degree | dates
+                                  Personal Projects  -> name | tech stack | [label](url)
+                                  (anything else)    -> title | org | dates
+                                                        (org may end with [label](url))
+- bullet text                -> a resume bullet; **bold** -> \textbf{...}
+: \rawlatex                  -> inject raw LaTeX here (e.g. : \vspace{-12pt})
+```
+
+Special characters (`& % $ # _`) are auto-escaped, so write `React & Next`, `$5K`,
+`70%` naturally. The **Skills** section uses `- Label: a, b, c` bullets (no `###`).
+A `: \vspace{..}` placed between bullets is inlined; placed after the last bullet it
+attaches to `\resumeItemListEnd` (matches the hand-tuned spacing in the original).
 
 ## Editing notes
 
