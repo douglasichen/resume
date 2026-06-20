@@ -31,11 +31,10 @@
 
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Link](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
-- Built an AI agent to ground resume claims with relevant internet sources; reached **1.5K users** in 24 hours
-- Architected an event-driven **4-Lambda** pipeline that extracts claims via LLM and verifies each with web search
+- Built a serverless AI agent that verifies resume claims against web sources in **8 hours**; hit **1.5K users** in 24h
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
-- Automated event scraping pipeline using AWS to route, process, and store **2.5K+** Instagram post previews
+- Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media platforms
 ### Dance CV (Hackathon Win) | TypeScript, React, Vite, OpenCV, MediaPipe, Gemini API | [Devpost](https://devpost.com/software/dance-cv)
 - Won the **Best Game Project Award** at nwHacks (**630+ contestants**) by building an AI dance coach in **12 hours**
