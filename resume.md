@@ -15,7 +15,7 @@
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15) | May 2026 -- Aug 2026
 - Built an AI triage pipeline that auto-routes **70%** of customer feedback, saving the team **10+ hrs/week**
-- Shipped an AI PR-review suite (AST + LLM rules, PII-logging) gating **100%** of PRs and cutting review time **30%**
+- Shipped an AI agent to review PRs in CI, cutting review time by **30%**
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ hrs/mo** by building AWS infrastructure to automatically process **320K+ emails** using Lambda
 - Automated the collection of **1M+** claims from insurance portals by developing bots using JavaScript & Puppeteer
@@ -31,11 +31,12 @@
 
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Link](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
-- Built a serverless AI agent that verifies resume claims against web sources in **8 hours**; hit **1.5K users** in 24h
+- Launched an AI agent to fact-check resumes with internet sources and hit **1.5K users** within 24 hours
+- Built a serverless pipeline to parse, process, and verify resumes using AWS Lambda, S3, and DynamoDB
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
-- Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media platforms
+- Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
 ### Dance CV (Hackathon Win) | TypeScript, React, Vite, OpenCV, MediaPipe, Gemini API | [Devpost](https://devpost.com/software/dance-cv)
 - Won the **Best Game Project Award** at nwHacks (**630+ contestants**) by building an AI dance coach in **12 hours**
 - **Tripled** accuracy by using the min error across neighboring frames (**sliding window**) to account for pose latency
