@@ -1,0 +1,24 @@
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# Editor / OS
+.DS_Store
+.vscode/
+
+# Keep the compiled PDF out of version control by default.
+# Comment the next line out if you want to commit the rendered resume.
+*.pdf
