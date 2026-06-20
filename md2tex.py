@@ -32,11 +32,27 @@ FOOTER = "\\end{document}\n"
 
 LINK = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
 
+# LaTeX special characters -> their escaped forms. Applied in a single pass over
+# the source string so the backslashes/braces we insert are never re-escaped.
+_SPECIALS = {
+    '\\': r'\textbackslash{}',
+    '{': r'\{', '}': r'\}',
+    '&': r'\&', '%': r'\%', '$': r'\$', '#': r'\#', '_': r'\_',
+    '~': r'\textasciitilde{}', '^': r'\textasciicircum{}',
+}
+
 
 def esc(s):
-    s = s.replace('&', r'\&').replace('%', r'\%').replace('$', r'\$')
-    s = s.replace('#', r'\#').replace('_', r'\_')
-    return s
+    return ''.join(_SPECIALS.get(ch, ch) for ch in s)
+
+
+def esc_url(u):
+    """Escape the characters that break hyperref's \\href argument.
+
+    Inside \\href, only # % & need a backslash (and they round-trip to the
+    correct character in the link); everything else is fine verbatim.
+    """
+    return u.replace('#', r'\#').replace('%', r'\%').replace('&', r'\&')
 
 
 def conv(s):
@@ -144,13 +160,13 @@ def emit_entry(sectype, entry):
         _, label, url = split_link(g(2))
         emph = conv(g(1))
         if url:
-            emph += ' $|$ \\href{' + url + '}{{\\underline{' + conv(label) + '}}}'
+            emph += ' $|$ \\href{' + esc_url(url) + '}{{\\underline{' + conv(label) + '}}}'
         out.append('        \\resumeProjectHeading')
         out.append('          {\\textbf{' + conv(g(0)) + '} $|$ \\emph{' + emph + '}}{}')
     else:                                  # subheadingB: title | org | dates
         otext, label, url = split_link(g(1))
         if url:
-            org = conv(otext) + ' $|$ \\underline{\\href{' + url + '}{' + conv(label) + '}}'
+            org = conv(otext) + ' $|$ \\underline{\\href{' + esc_url(url) + '}{' + conv(label) + '}}'
         else:
             org = conv(g(1))
         out.append('    \\resumeSubheadingB{' + conv(g(0)) + '}{' + conv(g(2)) + '}{' + org + '}')
@@ -175,8 +191,10 @@ def emit(doc):
            '    \\textbf{\\Huge ' + conv(doc['name']) + '} \\\\ \\vspace{1pt}']
     links = []
     for c in doc['contacts']:
-        disp, url = [x.strip() for x in c.split('|', 1)]
-        links.append('    \\href{' + url + '}{\\underline{' + conv(disp) + '}}')
+        parts = [x.strip() for x in c.split('|', 1)]
+        disp = parts[0]
+        url = parts[1] if len(parts) > 1 else parts[0]
+        links.append('    \\href{' + esc_url(url) + '}{\\underline{' + conv(disp) + '}}')
     for i, l in enumerate(links):
         out.append(l + (' $|$' if i < len(links) - 1 else ''))
     out += ['\\end{center}', '']
