@@ -38,9 +38,9 @@
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
 ## Hackathon Wins
-### 1st Place, Best Game Project @ nwHacks (630+) | Dance CV -- AI dance coach with sliding-window pose metric | [Devpost](https://devpost.com/software/dance-cv)
-### Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI cooking coach built in 24h | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
-### Hackathon Winner | ELOv -- conversational-skills trainer; 15K views, 140+ users | [Devpost](https://devpost.com/software/elov)
+### 1st Place, Best Game Project @ nwHacks | Dance CV -- AI dance coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
+### 1st Place, Best Use of Fetch.ai @ KickStart | LeetCode for dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
+### 1st Place, Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI cooking coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
 
 ## Leadership
 ### Program Leader | Shad Canada |
