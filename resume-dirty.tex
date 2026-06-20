@@ -1,0 +1,429 @@
+%-------------------------
+% Resume in Latex
+% Author : Jake Gutierrez
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+%------------------------
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{graphicx}
+% \usepackage{fontawesome5}
+\input{glyphtounicode}
+
+% Add the following package for footer image
+\usepackage{eso-pic}
+
+%----------FONT OPTIONS----------
+% sans-serif
+% \usepackage[sfdefault]{FiraSans}
+% \usepackage[sfdefault]{roboto}
+% \usepackage[sfdefault]{noto-sans}
+% \usepackage[default]{sourcesanspro}
+% \usepackage{times-new-roman}
+% \usepackage{times}
+
+% serif
+% \usepackage{CormorantGaramond}
+\usepackage{charter}
+
+% % Set up the footer
+% \pagestyle{fancy}
+% \fancyhf{} % clear all header and footer fields
+% \renewcommand{\headrulewidth}{0pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+% % Add the image to the footer
+% \AddToShipoutPictureBG{
+%   \AtPageLowerLeft{%
+%     \hspace{0.5cm}
+%     \raisebox{0.2cm}{%
+%       \includegraphics[width=0.5\paperwidth]{ubcfooter.png}
+%     }
+%   }%
+% }
+
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{graphicx}
+\usepackage{fontawesome5}
+\newcommand{\externallink}[2]{%
+  \href{#1}{#2\,\faExternalLink[regular]}%
+}
+\newcommand{\smallericon}[1]{\texorpdfstring{\scalebox{0.7}{#1}}{#1}}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% Sections formatting
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+% Ensure that generate pdf is machine readable/ATS parsable
+\pdfgentounicode=1
+
+%-------------------------
+% Custom commands
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-0.6pt}}
+  }
+}
+
+\newcommand{\urlNewWindowLabel}[2]{\href[pdfnewwindow=true]{#1}{#2}}
+
+\newcommand{\accomplishmentItem}[2]{
+  \item\small {
+    \begin{tabular*}{0.94\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubheadingD}[5]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+    \begin{itemize}[leftmargin=*]
+      \item \small #5
+    \end{itemize}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubheadingB}[3]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{#3} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubheadingC}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{#3} $|$ \textit{#4} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+
+%-------------------------------------------
+%%%%%%  RESUME STARTS HERE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+
+%----------HEADING----------
+% \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+%   \textbf{\href{http://sourabhbajaj.com/}{\Large Sourabh Bajaj}} & Email : \href{mailto:sourabh@sourabhbajaj.com}{sourabh@sourabhbajaj.com}\\
+%   \href{http://sourabhbajaj.com/}{http://www.sourabhbajaj.com} & Mobile : +1-123-456-7890 \\
+% \end{tabular*}
+
+\begin{center}
+    \textbf{\Huge Douglas Chen} \\ \vspace{1pt}
+    \href{mailto:douglas@ichen.ca}{\underline{douglas@ichen.ca}} $|$ 
+    % \href{mailto:dcvweb123@gmail.com}{\underline{dcvweb123@gmail.com}} $|$ 
+    \href{https://www.douglaschen.ca/}{\underline{douglaschen.ca}} $|$
+    \href{https://www.linkedin.com/in/douglasichen/}{\underline{linkedin.com/in/douglasichen
+}} $|$
+    % \href{https://github.com/douglasichen}{\underline{GitHub}}
+    \href{https://www.github.com/douglasichen}{\underline{github.com/douglasichen}}
+\end{center}
+
+% %-----------PROFILE-----------
+% \section{Profile}
+%     I am a competitive and ambitious student with a burning passion for programming. As a restless learner constantly looking for challenges to pursue, I developed several projects you can find on my \href{https://douglaschen.vercel.app/?v=1}{\textbf{\textcolor{blue}{\underline{Portfolio}}}}.
+
+% \section{Highlights}
+%     \resumeItemListStart
+%         \resumeItem{Developed an {\href{https://www.youtube.com/watch?v=mMaEmro4iEw}{\color{blue}{\underline{AI App Developer}}}}, enabling the creation of \textbf{15+ IOS apps} with 0 lines of code }
+%         \resumeItem{Programmed a neural net from scratch using dynamic prozzgramming and gradient descent (no ML or math libraries)}
+%     \resumeItemListEnd
+
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of British Columbia}{Vancouver, BC}
+      {Bachelor of Science in Computer Science, Co-op program}{Sep 2023 -- Apr 2028}
+      \resumeItemListStart 
+        \resumeItem{Relevant Courses: Object-Oriented Design, Algorithms and Data Structures, Operating Systems, Databases}
+    \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+  %-----------PROGRAMMING SKILLS-----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+         \textbf{Languages:}{ TypeScript/JavaScript, Python, Java, C++, Shell Script, SQL, HTML/CSS} \\
+     \textbf{Frameworks/Tools:}{ AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, LLMs, Git, Node, React, Next, Jest, Puppeteer%, Playwright %
+     } 
+    }}
+ \end{itemize}
+% -------------------------------------------
+%-----------EXPERIENCE-----------
+\section{Work Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheadingB{Software Engineer Intern}{Starting May 2026}{NimbleRx (YC W15)}
+        \resumeItemListStart
+            \resumeItem{Incoming Platform Team engineer with a focus on AWS optimization, database performance, and internal tooling}
+        \resumeItemListEnd
+    \resumeSubheadingB
+        {Software Engineer Intern}{Jan 2025 -- Aug 2025}{InsideDesk}
+        \resumeItemListStart
+            % \resumeItem{Engineered MFA handling infrastructure to route and process verification emails through \textbf{AWS \& Redis}, coordinating bots with \textbf{concurrency programming} to enable reliable web scraping without human intervention}
+            % \resumeItem{Built \textbf{AWS} infrastructure to automatically process \textbf{320K+} emails using \textbf{Redis}, saving clients \textbf{210+ hours/month}}
+            \resumeItem{Saved clients \textbf{210+ hrs/mo} by building AWS infrastructure to automatically process \textbf{320K+ emails} using Lambda}
+            % \resumeItem{Developed bots using \textbf{JavaScript} \& \textbf{Puppeteer}, automating the collection of \textbf{1M+} claims from insurance portals}
+            \resumeItem{Automated the collection of \textbf{1M+} claims from insurance portals by developing bots using JavaScript \& Puppeteer}
+            
+            \resumeItem{Resolved a \textbf{3-year} QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by \textbf{20x}}
+            % \resumeItem{Sped up testing process by \textbf{20x}, resolving a 3-year QA bottleneck with \textbf{PostgreSQL} and \textbf{Python} scripts}
+            \resumeItem{Analyzed AWS CloudWatch data to pinpoint and resolve a critical bug, improving data collection reliability by \textbf{8x}}
+            % \resumeItem{Boosted collection reliability \textbf{8x} by using AWS \textbf{CloudWatch} queries to pinpoint and resolve a critical bug}
+            % \resumeItem{Automated deployments for containerized jobs using \textbf{Bitbucket Pipelines}, \textbf{Docker}, and \textbf{Linux shell scripts}}
+            \resumeItem{Built CI/CD pipeline for containerized services using Bitbucket Pipelines, Docker, and Linux shell scripts}
+            % \resumeItem{Architected an automated MFA handling system by routing and processing verification emails through \textbf{AWS}, to enable reliable and scalable web scraping without human intervention \textbf{(DSA, Asynchronous Programming)}}
+            % \resumeItem{Utilized epics, stories, and tickets in an \textbf{agile lifecycle}, ensuring PRs have high test coverage using \textbf{Jest}}
+            % \resumeItem{Utilized epics and tickets to manage tasks in an \textbf{agile lifecycle}, and wrote \textbf{Jest} tests to ensure high PR coverage}
+            % \resumeItem{Managed PII in compliance with HIPAA regulations, ensuring secure data access, storage, and transmission}
+        \resumeItemListEnd
+
+    \resumeSubheadingB
+        {AI Consultant}{Sep 2024 -- Oct 2024}{Self-employed}
+        \resumeItemListStart
+            % \resumeItem{Advised a dental software company on developing AI-powered insurance data management solutions}
+            \resumeItem{Secured a \textbf{\$5K} contract with a dental software company to develop AI agents for insurance data management}
+            \resumeItem{Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by \textbf{3.5x}}
+            \resumeItem{Deployed a full-stack web app (React \& Next) to curate feedback from experts and improve AI model accuracy}
+        \resumeItemListEnd
+
+    % \resumeSubheadingC
+    %     {AI Software Developer Intern}{May 2024 -- Aug 2024}{Exchange Solutions Inc.}{
+    %     % {\href{https://www.youtube.com/watch?v=mMaEmro4iEw}{\color{blue}{\underline{Demo}}}}
+    %     \href{https://www.youtube.com/watch?v=mMaEmro4iEw}{\color{blue}{\texorpdfstring{\scalebox{0.7}{\faExternalLink*}}{[link]}}}}
+    \resumeSubheadingB
+        {AI Software Engineer Intern}{May 2024 -- Aug 2024}{Exchange Solutions $|$ \underline{\href{https://www.youtube.com/watch?v=mMaEmro4iEw}{Demo}}}
+        \resumeItemListStart
+            % \resumeItem{Independently developed an \textbf{AI agent} that creates mobile app prototypes within \textbf{30 minutes} by leveraging a human-in-the-loop LLM design, enabling no-code software development}
+            % \resumeItem{Developed an \textbf{AI agent} that creates mobile apps under \textbf{30 minutes} using a \textbf{human-in-the-loop} and \textbf{JavaScript}}
+            
+            \resumeItem{Developed an AI agent that creates mobile app prototypes \textbf{under 30 min} using a Human-in-the-loop \& JavaScript}
+            % \resumeItem{Boosted development speed for junior developers by \textbf{4x} by implementing autonomous package installation and file management using \textbf{multi-modal LLMs}, empowering an AI agent to generate over \textbf{70\%} of its own user interface}
+            % \resumeItem{Implemented autonomous file management using \textbf{LLMs}, enabling AI to generate \textbf{70\%} of its \textbf{React Native} frontend}
+            \resumeItem{Enabled agent to generate \textbf{70\%} of its own React Native frontend through autonomous file management using LLMs}
+            % \resumeItem{Implemented a \textbf{full-stack} application including an intuitive frontend to make an AI agent accessible and easy to use for non-technical users \textbf{(Node, React Native, AWS Bedrock \& Lambda)}}
+             % \resumeItem{Constructed a rigorous testing framework, executing hundreds of efficiency and quality benchmark tests to iteratively refine an AI app developer, gaining experience in data-driven software development}
+             % \resumeItem{First intern at ESI to earn a \textbf{Bravo Certificate for Innovation} from senior management after delivering a company-wide demo to \textbf{100+} co-workers, demonstrating strong presentation skills}
+             \resumeItem{First intern to earn a \textbf{Bravo Certificate for Innovation} from senior management after demoing to \textbf{100+} co-workers}
+        \resumeItemListEnd\vspace{-10pt}
+% -----------Multiple Positions Heading-----------
+%    \resumeSubSubheading
+%     {Software Engineer I}{Oct 2014 - Sep 2016}
+%     \resumeItemListStart
+%        \resumeItem{Apache Beam}
+%          {Apache Beam is a unified model for defining both batch and streaming data-parallel processing pipelines}
+%     \resumeItemListEnd
+%    \resumeSubHeadingListEnd
+%-------------------------------------------
+  \resumeSubHeadingListEnd
+% \section{Additional Work Experience}
+%     \resumeSubHeadingListStart
+%         \resumeSubheadingB{Program Assistant}{Jul 2024 -- Jul 2024}{Shad Canada}
+%             \resumeItemListStart
+%                 \resumeItem{Dedicated \textbf{90+} hour weeks to facilitate a STEAM program involving workshops and student-led entrepreneurship projects, displaying an unwavering sense of responsibility and commitment to student growth and innovation}
+%                 \resumeItem{Organized and delivered a workshop on the applications, potential, and safety of Generative AI, attracting \textbf{25+} students to attend a voluntary follow-up session due to high interest, showcasing the ability to engage an audience}
+%                 \resumeItem{Maintained an engaged and respectful audience of \textbf{64} high school students during long hours of lectures \& workshops, demonstrating strong leadership, patience, and communication skills}
+%             \resumeItemListEnd
+%     \resumeSubHeadingListEnd
+%     \vspace{-6pt}
+%-----------PROJECTS-----------
+\section{Personal Projects}
+    \resumeSubHeadingListStart
+        \resumeProjectHeading
+              {\textbf{Resume Bullsh*t Detector} $|$ \emph{TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend $|$ \href{https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/}{{\underline{More}}}}}{}
+              \resumeItemListStart 
+                \resumeItem{Built an AI agent to ground resume claims with relevant internet sources; reached \textbf{1500 users} in 24 hours}
+              \resumeItemListEnd
+        \resumeProjectHeading
+              {\textbf{Free Food @ UBC} $|$ \emph{TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock \& API Gateway) $|$ \href{https://www.freefoodatubc.ca/}{{\underline{Visit}}}}}{}
+              \resumeItemListStart 
+                \resumeItem{Developed a platform to combat food insecurity for students by aggregating events with free food from \textbf{400+ orgs}}
+                \resumeItem{Automated event scraping pipeline using AWS to route, process, and store \textbf{2500+} Instagram post previews}
+                \resumeItem{Drove \textbf{3K visits} and \textbf{100+ active users} in under 2 weeks with a \textbf{\$0 budget} through social media platforms}
+                % \resumeItem{Implemented \textbf{Vite + React} web app; installed \textbf{Google Analytics} to track and optimize traffic; deployed with \textbf{Vercel}}
+              \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Dance CV (Hackathon Win)} $|$ \emph{TypeScript, React, Vite, OpenCV, MediaPipe, Gemini API $|$ \href{https://devpost.com/software/dance-cv}{{\underline{Devpost}}}}}{}
+          \resumeItemListStart 
+            \resumeItem{Won the \textbf{Best Game Project Award} at nwHacks (\textbf{630+ contestants}) by building an AI dance coach in \textbf{12 hours}}
+            % \resumeItem{Engineered a pose comparison algorithm that provides feedback by computing RMS errors between joint angles}
+            \resumeItem{\textbf{Tripled} accuracy by using the min error across neighboring frames (\textbf{sliding window}) to account for pose latency}
+          \resumeItemListEnd
+        \resumeProjectHeading
+              {\textbf{ELOv (Hackathon Win)} $|$ \emph{TypeScript, React, Vite, Vercel, Supabase, Google Analytics, Gemini API, Fetch AI $|$ \href{https://devpost.com/software/elov}{{\underline{Devpost}}}}}{}
+              \resumeItemListStart 
+                \resumeItem{Launched a LeetCode-style training ground for users to improve their conversational skills across romantic scenarios}
+                \vspace{-12pt}
+                % \resumeItem{Built a full-stack website in \textbf{10 hours} using React \& Vite; integrated AI agents via Supabase Edge Functions}
+                % \resumeItem{Built AI agents using TypeScript \& Gemini; deployed via Supabase and Fetch AI}
+                \resumeItem{Acquired \textbf{15K views}, \textbf{140+ users}, \textbf{400+ submissions}, and \textbf{17-min avg sessions} through organic marketing}
+                % \resumeItem{Implemented \textbf{Vite + React} web app; installed \textbf{Google Analytics} to track and optimize traffic; deployed with \textbf{Vercel}}
+              \resumeItemListEnd
+        \resumeProjectHeading
+              {\textbf{ChefMate (Hackathon Win)} $|$ \emph{TypeScript, React, Vite, Vercel, Gemini API, ElevenLabs $|$ \href{https://devpost.com/software/chefmate-j0mh5d}{{\underline{Devpost}}}}}{}
+              \resumeItemListStart 
+                \resumeItem{Won the \textbf{Best use of ElevenLabs Award} at Hack the Coast by building an AI cooking coach in \textbf{24 hours}}
+                \resumeItem{Deployed mobile web-app on Vercel; utilized ElevenLabs conversational agent and Gemini API}
+              \resumeItemListEnd
+        
+        % \resumeProjectHeading
+        %       {\textbf{AI Rubik's Cube Solver} $|$ \emph{Python, PyTorch, Deep Q-Network $|$ \href{https://github.com/douglasichen/rubiks-cube-solver-rl}{\underline{Code}}}}{}
+        %       \resumeItemListStart 
+        %         \resumeItem{Constructed RL algorithm to solve a 2x2x2 rubik's cube, achieving \textbf{99.6\% solve rate} for under 6 mixes}
+        %         \resumeItem{Reached an \textbf{85\% solve rate} for under 10 mixes, demonstrating model generalization beyond training data}
+        %         \resumeItem{Implemented Deep Q-Network with curriculum learning and target network stabilization using PyTorch}
+        %         \resumeItem{Sped up training algorithm by \textbf{4x} through hyperparameter tuning and compressing the state representation}
+        %       \resumeItemListEnd
+        % \resumeProjectHeading
+        %       {\textbf{Neural Network From Scratch} $|$ \emph{C++}}{}
+        %       \resumeItemListStart 
+        %         \resumeItem{Implemented a neural network using gradient descent to recognize handwritten digits with a \textbf{93\% accuracy}}
+        %       \resumeItemListEnd
+
+        
+%         % \resumeProjectHeading
+%         %   {\textbf{Medieval Tycoon} $|$ \emph{Roblox Studio, Lua $|$ \href{https://douglaschen.vercel.app/projects/Medieval-Tycoon}{\underline{Demo}}}}{Dec 2021 -- April 2022}
+%         %   \resumeItemListStart
+%         %     \resumeItem{Lead technical development cycle for a multiplayer tycoon-style video game built with Roblox Studio and Lua}
+%         %     \resumeItem{Programmed NPC systems optimized to handle \textbf{200+ entities}, including an army of knights users can command and flocks of hostile chickens}
+%         %     \resumeItemListEnd
+        
+%         % \resumeProjectHeading
+%         %   {\textbf{Alfred} $|$ \emph{React, JavaScript, Firebase $|$ \href{https://douglaschen.vercel.app/projects/Alfred}{\underline{Demo}} }}{Dec 2023 -- Jan 2024}
+%         %   \resumeItemListStart
+%         %     \resumeItem{A reservation assistant produced for a client who required an automatic tennis court booking system}
+%         %     \resumeItem{Constructed database schema, programmed \textbf{REST API} endpoints, and optimized backend data transmission by implementing parallel computation, improving execution speed by \textbf{10x}}
+%         %     \resumeItemListEnd
+%         % \resumeProjectHeading
+%         %   {\textbf{Digit Recognizer Web App} $|$ \emph{Tensorflow.js, Typescript, React $|$ \href{https://draw-number-ui.vercel.app/}{\underline{Demo}} }}{Dec. 2023 -- Jan. 2024}
+%         %   \resumeItemListStart
+%         %     \resumeItem{ Fullstack drawing application built with React and Tensorflow.js that recognizes handwritten digits with \textbf{98\% accuracy} }
+%         %   \resumeItemListEnd
+%         \resumeProjectHeading
+%           {\textbf{Portal Wizard} $|$ \emph{Java, LibGDX, Object-Oriented Programming, JProfiler $|$ \href{https://douglaschen.vercel.app/projects/Portal-Game}{\underline{Demo}} }}{Jan 2022 -- Jun 2022}
+%           \resumeItemListStart 
+%             \resumeItem{Led an effective team of aspiring game developers to develop a portal game by efficiently delegating tasks}
+%             \resumeItem{Reprogrammed the portal system to accommodate bugs and optimized runtime performance by \textbf{150\%}}
+%             \resumeItem{Investigated and debugged memory leaks, eliminating unstable memory size and reducing RAM usage by \textbf{3x}}
+%           \resumeItemListEnd
+        % \resumeProjectHeading
+          % {\textbf{Spider Cave Game} $|$ \emph{Python, Godot $|$ \href{https://www.douglaschen.ca/\#ubc-game-dev}{\underline{Demo}} }}{}
+          % \resumeItemListStart 
+          %   \resumeItem{Simulated spider movement using \textbf{inverse-kinematics}, enabling natural adaptation to uneven walls and ceilings}
+          %   \resumeItem{Built custom testing tools to maintain project consistency and functionality, saving the team \textbf{20+ hours}}
+          % \resumeItemListEnd
+        % \resumeProjectHeading
+        %   {\textbf{Portal Wizard} $|$ \emph{Java, Object-Oriented Programming, JProfiler $|$ \href{https://www.douglaschen.ca/\#portal-wizard}{\underline{Demo}} }}{}
+        %   \resumeItemListStart 
+        %     \resumeItem{Designed and developed a 2D portal game using Java, Object-Oriented Programming and LibGDX}
+        %     \resumeItem{Optimized portal algorithm, \textbf{doubling} frame-rate; debugged memory leaks using JProfiler, reducing memory by \textbf{3x}}
+        %     % \resumeItem{Debugged memory leaks using JProfiler, reducing RAM usage by \textbf{3x}}
+        %   \resumeItemListEnd
+%         % \resumeProjectHeading
+%         %   {\textbf{Froggi} $|$ \emph{GMS2, GML, Audacity, GarageBand, Object-Oriented Programming $|$ \href{https://douglaschen.vercel.app/projects/Froggi}{\underline{Demo}} }}{Aug 2021}
+%         %   \resumeItemListStart  
+%         %     \resumeItem{Efficiently executed a month long video game development project by adopting an Object-Oriented Design}
+%         %     \resumeItem{Produced original video game music and sound effects, demonstrating a creative and artistic mindset}
+%         %   \resumeItemListEnd
+        
+    \resumeSubHeadingListEnd
+
+
+
+% \section{Technical Extracurricular Activities}
+%     \resumeItemListStart
+%         \accomplishmentItem{\textbf{Video Game Development Club Member} $|$ University of British Columbia}{Sep 2023 -- Apr 2024}
+%         \accomplishmentItem{\textbf{Competitive Programming Club President} $|$ Port Credit Secondary School}{Sep 2021 -- Jun 2023}
+%     \resumeItemListEnd\vspace{6pt}
+
+
+
+  
+
+
+% \section{Awards}
+%     \resumeItemListStart
+%         \accomplishmentItem{\$250 Prize Winner $|$ \textbf{UBC BizTech Kickstart Hackathon}}{2025}
+%         \accomplishmentItem{Top 5 Winner $|$ \textbf{UBC CIC AI and Sustainability Hackathon}}{2024}
+%         \accomplishmentItem{Group 4 Honour Roll $|$ \textbf{Canadian Computing Senior Competition}}{2023}
+%     \resumeItemListEnd
+      
+\section{Leadership}
+    \resumeSubHeadingListStart
+        \resumeSubheadingB{Program Leader}{}{Shad Canada}
+            \resumeItemListStart
+                \resumeItem{Dedicated \textbf{90+ hours/week} to facilitate a month-long STEAM program for student-led entrepreneurship projects}
+                \resumeItem{Delivered a workshop on the applications and safety of AI, attracting \textbf{25+} students to attend a follow-up session}
+                % \resumeItem{Maintained a respectful audience of \textbf{64} high school students during long hours of lectures and workshops}
+            \resumeItemListEnd
+    \resumeSubHeadingListEnd
+    \vspace{-6pt}
+    
+\end{document}

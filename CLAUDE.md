@@ -1,12 +1,16 @@
 # Resume
 
-Single-file LaTeX resume. Source of truth is `resume.tex`; everything else is generated.
+LaTeX resume.
+
+- **`resume.tex`** — the clean, primary resume. Edit this one.
+- **`resume-dirty.tex`** — the full archive, same layout but with many alternate bullet
+  phrasings kept around as comments. Mine it for wording, then port changes to `resume.tex`.
 
 All generated files (PDF + `.aux`/`.log`/etc.) go into `build/`, configured via
 `.latexmkrc` (`$out_dir = 'build'`). The repo root stays clean — only `.tex` sources
 live there. `build/` is gitignored.
 
-The compiled PDFs are `build/resume.pdf` and `build/resume-clean.pdf`.
+The compiled PDFs are `build/resume.pdf` and `build/resume-dirty.pdf`.
 
 ### From the command line
 Requires a TeX distribution (MacTeX). The engine lives at `/Library/TeX/texbin`.
@@ -51,8 +55,8 @@ its output also lands in `build/`.
   - `\resumeSubheadingB{title}{date}{org}` — single-line role with `org` after a `|`
   - `\resumeProjectHeading{heading}{date}` — project entry
   - `\resumeItem{...}` — a bullet (wrap groups in `\resumeItemListStart` / `...End`)
-- A lot of content is commented out (`%`) — it's an archive of alternate bullet
-  phrasings. Toggle comments rather than deleting, to keep options around.
+- `resume-dirty.tex` keeps a lot of content commented out (`%`) — an archive of
+  alternate bullet phrasings. `resume.tex` has those stripped for a clean source.
 - Packages in use include `fontawesome5`, `charter` (font), `marvosym`, `hyperref`,
   `titlesec`, `enumitem`. All ship with MacTeX-full.
 - Keep it to **one page**. After editing, rebuild and confirm `pdfinfo resume.pdf`
