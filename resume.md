@@ -14,10 +14,9 @@
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15) | May 2026 -- Aug 2026
-- Built a **Gemini Flash** pipeline that classifies and routes pharmacy feedback to the right product-area owners
-- Shipped NimbleRx's first standalone **Gemini** integration end-to-end, establishing reusable structured-JSON output
-- Built an AI PR-review suite (AST anti-pattern rules, coverage interpreter, PII-logging guard) for every PR
-- Closed an account-enumeration leak in pharmacy login by unifying pre-auth failure responses and hardening CSP
+- Built a **Gemini Flash** triage pipeline that auto-routes **70%** of pharmacy feedback, saving **10+ hrs/week**
+- Shipped an AI PR-review suite (AST + LLM rules, PII-logging) gating **100%** of PRs and cutting review time **30%**
+- Closed an account-enumeration leak across **100%** of pharmacy login responses, killing a key attack vector
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ hrs/mo** by building AWS infrastructure to automatically process **320K+ emails** using Lambda
 - Automated the collection of **1M+** claims from insurance portals by developing bots using JavaScript & Puppeteer
@@ -28,7 +27,6 @@
 - Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by **3.5x**
 ### AI Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
 - Developed an AI agent that creates mobile app prototypes **under 30 min** using a Human-in-the-loop & JavaScript
-- Enabled agent to generate **70%** of its own React Native frontend through autonomous file management using LLMs
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
 : \vspace{-10pt}
 
