@@ -80,6 +80,19 @@ Special characters (`& % $ # _`) are auto-escaped, so write `React & Next`, `$5K
 A `: \vspace{..}` placed between bullets is inlined; placed after the last bullet it
 attaches to `\resumeItemListEnd` (matches the hand-tuned spacing in the original).
 
+### Auto-rebuild (edit Markdown, watch the PDF)
+
+Opening this folder in VSCode auto-starts a watcher (`watch.sh`, wired up in
+`.vscode/tasks.json` with `runOn: folderOpen`). It rebuilds `build/resume.pdf`
+every time `resume.md` is saved — no terminal needed. The first time, VSCode asks
+to "Allow Automatic Tasks"; allow it once.
+
+Recommended layout: `resume.md` on the left, `build/resume.pdf` (LaTeX Workshop's
+viewer, which auto-refreshes) on the right. You never need to touch the `.tex`.
+
+The watcher is zero-dependency (polls the file's mtime once a second). To run it
+by hand instead: `./watch.sh`. To stop the auto-start, delete `.vscode/tasks.json`.
+
 ## Editing notes
 
 - This is the [Jake Gutierrez resume template](https://github.com/sb2nov/resume) (MIT).
