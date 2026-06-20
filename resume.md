@@ -14,13 +14,12 @@
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
-- Built an AI triage pipeline that auto-routes **70%** of customer feedback, saving the team **10+ hrs/week**
-- Shipped an AI agent to review PRs in CI, cutting review time by **30%**
+- Built an AI triage pipeline to autonomously manage **60%** of customer tickets, saving the team **40 h/wk** (Gemini)
+- Shipped a CI-integrated AI agent that reviews PRs to prevent production disasters across **100%** of internal repos
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
-- Saved clients **210+ hrs/mo** by building AWS infrastructure to automatically process **320K+ emails** using Lambda
+- Saved clients **210+ h/mo** by building AWS infrastructure to automatically process **320K+ emails** using Lambda
 - Automated the collection of **1M+** claims from insurance portals by developing bots using JavaScript & Puppeteer
 - Resolved a **3-year** QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by **20x**
-- Analyzed AWS CloudWatch data to pinpoint and resolve a critical bug, improving data collection reliability by **8x**
 ### AI Consultant | Self-employed | Sep 2024 -- Oct 2024
 - Secured a **$5K** contract with a dental software company to develop AI agents for insurance data management
 - Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by **3.5x**
@@ -32,7 +31,7 @@
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Link](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
-- Built a serverless pipeline to parse, process, and verify resumes using AWS Lambda, S3, and DynamoDB
+- Built a serverless pipeline to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
