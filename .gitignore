@@ -1,4 +1,7 @@
-# LaTeX build artifacts
+# All compiled output (PDF + aux files) goes here via .latexmkrc ($out_dir = 'build')
+build/
+
+# Stray LaTeX artifacts, in case something compiles outside build/
 *.aux
 *.fdb_latexmk
 *.fls
@@ -8,17 +11,8 @@
 *.toc
 *.bbl
 *.blg
-*.lof
-*.lot
-*.nav
-*.snm
-*.vrb
-*.xdv
+*.pdf
 
 # Editor / OS
 .DS_Store
 .vscode/
-
-# Keep the compiled PDF out of version control by default.
-# Comment the next line out if you want to commit the rendered resume.
-*.pdf

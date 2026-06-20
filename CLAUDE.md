@@ -2,22 +2,26 @@
 
 Single-file LaTeX resume. Source of truth is `resume.tex`; everything else is generated.
 
-## Rendering
+All generated files (PDF + `.aux`/`.log`/etc.) go into `build/`, configured via
+`.latexmkrc` (`$out_dir = 'build'`). The repo root stays clean — only `.tex` sources
+live there. `build/` is gitignored.
+
+The compiled PDFs are `build/resume.pdf` and `build/resume-clean.pdf`.
 
 ### From the command line
 Requires a TeX distribution (MacTeX). The engine lives at `/Library/TeX/texbin`.
 
 ```sh
-# One-shot build -> resume.pdf
-latexmk -pdf resume.tex
+# One-shot build -> build/resume.pdf
+latexmk resume.tex
 
 # Auto-rebuild on save while editing
-latexmk -pdf -pvc resume.tex
+latexmk -pvc resume.tex
 
-# Delete all build artifacts (keeps resume.pdf)
+# Delete aux files in build/ (keeps the PDF)
 latexmk -c
 
-# Delete everything generated, including resume.pdf
+# Delete everything generated, including the PDF
 latexmk -C
 ```
 
@@ -30,8 +34,9 @@ eval "$(/usr/libexec/path_helper)"   # or: export PATH="/Library/TeX/texbin:$PAT
 
 ### In VSCode (LaTeX Workshop)
 The `LaTeX Workshop` extension (`james-yu.latex-workshop`) is configured in the user
-`settings.json` to call `latexmk` by absolute path, so builds work regardless of how
-VSCode was launched.
+`settings.json` to call `latexmk` by absolute path (so builds work regardless of how
+VSCode was launched) and with `latex-workshop.latex.outDir` set to `%DIR%/build`, so
+its output also lands in `build/`.
 
 - Build: `Cmd+Option+B`
 - Preview PDF: `Cmd+Option+V`
