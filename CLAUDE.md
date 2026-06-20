@@ -1,115 +1,105 @@
 # Resume
 
-LaTeX resume.
+A one-page LaTeX résumé generated from a simple Markdown source.
 
-- **`resume.md`** — simple Markdown source. The easiest place to edit content.
-- **`resume.tex`** — the clean LaTeX resume (generated-compatible; safe to edit directly too).
-- **`resume-dirty.tex`** — the full archive, same layout but with many alternate bullet
-  phrasings kept around as comments. Mine it for wording, then port changes over.
-- **`md2tex.py`** — converts `resume.md` -> LaTeX matching `resume.tex` 1:1.
-
-All generated files (PDF + `.aux`/`.log`/etc.) go into `build/`, configured via
-`.latexmkrc` (`$out_dir = 'build'`). The repo root stays clean — only `.tex` sources
-live there. `build/` is gitignored.
-
-The compiled PDFs are `build/resume.pdf` and `build/resume-dirty.pdf`.
-
-### From the command line
-Requires a TeX distribution (MacTeX). The engine lives at `/Library/TeX/texbin`.
-
-```sh
-# One-shot build -> build/resume.pdf
-latexmk resume.tex
-
-# Auto-rebuild on save while editing
-latexmk -pvc resume.tex
-
-# Delete aux files in build/ (keeps the PDF)
-latexmk -c
-
-# Delete everything generated, including the PDF
-latexmk -C
+```
+resume.md  ──(scripts/md2tex.py)──▶  resume.tex  ──(latexmk)──▶  build/resume.pdf
 ```
 
-If `latexmk` is "not found", the TeX binaries aren't on your PATH. Either restart the
-terminal after installing MacTeX, or run:
+## Files
+
+- **`resume.md`** — source of truth. **Edit this.**
+- **`scripts/md2tex.py`** — converts `resume.md` → LaTeX. The preamble + macros are baked
+  in; output is verified pixel-identical to the original hand-written resume.
+- **`scripts/watch.sh`** — zero-dependency watcher: on `resume.md` save, runs `md2tex.py` + `latexmk`.
+- **`scripts/test_md2tex.py`** — test suite for the converter.
+- **`resume.tex`** — **generated** from `resume.md` on every build. Do **not** edit by
+  hand; changes get overwritten on the next rebuild.
+- **`resume-dirty.tex`** — archive of alternate bullet phrasings kept as LaTeX comments.
+  Mine it for wording, then edit `resume.md`.
+- **`.vscode/tasks.json`** — auto-starts the watcher when the folder is opened.
+- **`.latexmkrc`** — sends all build output into `build/`.
+- **`media/`** — screenshots used in `README.md`.
+- **`build/`** — compiled PDF + aux files (gitignored). The résumé is `build/resume.pdf`.
+
+## Workflow: edit Markdown, watch the PDF
+
+Open this folder in VSCode and the watcher starts automatically (`watch.sh`, via
+`.vscode/tasks.json` `runOn: folderOpen`). Edit `resume.md`, save, and
+`build/resume.pdf` rebuilds — no terminal needed. The first time, VSCode asks to
+**"Allow Automatic Tasks"**; allow it once.
+
+Recommended layout: `resume.md` on the left, `build/resume.pdf` (LaTeX Workshop's
+viewer, which auto-refreshes) on the right. You never touch the `.tex`.
+
+Run the watcher by hand: `./scripts/watch.sh`. Stop the auto-start: delete `.vscode/tasks.json`.
+
+## Build from the command line
+
+Requires a TeX distribution (MacTeX); the engine lives at `/Library/TeX/texbin`.
 
 ```sh
-eval "$(/usr/libexec/path_helper)"   # or: export PATH="/Library/TeX/texbin:$PATH"
+python3 scripts/md2tex.py resume.md resume.tex && latexmk resume.tex   # -> build/resume.pdf
+latexmk -c    # delete aux files in build/ (keep the PDF)
+latexmk -C    # delete everything generated, including the PDF
 ```
 
-### In VSCode (LaTeX Workshop)
-The `LaTeX Workshop` extension (`james-yu.latex-workshop`) is configured in the user
-`settings.json` to call `latexmk` by absolute path (so builds work regardless of how
-VSCode was launched) and with `latex-workshop.latex.outDir` set to `%DIR%/build`, so
-its output also lands in `build/`.
+If `latexmk` is "not found", MacTeX isn't on your PATH — restart the terminal, or:
+`export PATH="/Library/TeX/texbin:$PATH"` (or `eval "$(/usr/libexec/path_helper)"`).
 
-- Build: `Cmd+Option+B`
-- Preview PDF: `Cmd+Option+V`
-- It also builds automatically on save.
-
-## Markdown pipeline (`resume.md` -> LaTeX)
-
-`md2tex.py` turns a simple Markdown file into LaTeX that matches `resume.tex`
-(verified pixel-identical). The LaTeX preamble + macros are baked into the script;
-the Markdown only carries content.
-
-```sh
-python3 md2tex.py resume.md           # print LaTeX to stdout
-python3 md2tex.py resume.md resume.tex  # regenerate resume.tex from resume.md
-```
-
-Markdown schema:
+## Markdown schema
 
 ```
 # Name                       -> centered name
 - display | url              -> a contact link (one per line, under the name)
 
 ## Section                   -> \section{...}
-### a | b | c [| d]          -> entry header; field meaning depends on the section:
-                                  Education          -> org | location | degree | dates
-                                  Personal Projects  -> name | tech stack | [label](url)
-                                  (anything else)    -> title | org | dates
-                                                        (org may end with [label](url))
-- bullet text                -> a resume bullet; **bold** -> \textbf{...}
-: \rawlatex                  -> inject raw LaTeX here (e.g. : \vspace{-12pt})
+### a | b | c [| d]          -> an entry; field meaning depends on the section:
+       Education                          -> org | location | degree | dates
+       Personal Projects / Hackathon Wins -> name | tech stack | [label](url)
+       (anything else, e.g. Work, Leadership) -> title | org | dates
+                                              (org may end with [label](url))
+- bullet text                -> a résumé bullet; **bold** becomes \textbf{...}
+: \rawlatex                  -> inject raw LaTeX here (e.g. `: \vspace{-12pt}`)
 ```
 
-Special characters (`& % $ # _`) are auto-escaped, so write `React & Next`, `$5K`,
-`70%` naturally. The **Skills** section uses `- Label: a, b, c` bullets (no `###`).
-A `: \vspace{..}` placed between bullets is inlined; placed after the last bullet it
-attaches to `\resumeItemListEnd` (matches the hand-tuned spacing in the original).
+- Special characters (`& % $ # _ { } ~ ^ \`) are auto-escaped — write `React & Next`,
+  `$5K`, `70%` naturally.
+- The **Skills** section uses `- Label: a, b, c` bullets (no `###` entries).
+- `[label](url)` becomes a hyperlink wherever a link is expected.
+- A `: \vspace{..}` between bullets is inlined; after the last bullet it attaches to
+  `\resumeItemListEnd` (preserves hand-tuned spacing).
 
-### Auto-rebuild (edit Markdown, watch the PDF)
+## Tests
 
-Opening this folder in VSCode auto-starts a watcher (`watch.sh`, wired up in
-`.vscode/tasks.json` with `runOn: folderOpen`). It rebuilds `build/resume.pdf`
-every time `resume.md` is saved — no terminal needed. The first time, VSCode asks
-to "Allow Automatic Tasks"; allow it once.
+```sh
+python3 scripts/test_md2tex.py
+```
 
-Recommended layout: `resume.md` on the left, `build/resume.pdf` (LaTeX Workshop's
-viewer, which auto-refreshes) on the right. You never need to touch the `.tex`.
+Covers escaping, bold, links, field parsing, section dispatch, spacing directives, and
+end-to-end LaTeX compilation of adversarial inputs.
 
-The watcher is zero-dependency (polls the file's mtime once a second). To run it
-by hand instead: `./watch.sh`. To stop the auto-start, delete `.vscode/tasks.json`.
+## Editing / template notes
 
-## Editing notes
-
-- This is the [Jake Gutierrez resume template](https://github.com/sb2nov/resume) (MIT).
-- Layout is driven by custom macros defined in the preamble — prefer using them over
-  raw LaTeX so spacing stays consistent:
-  - `\resumeSubheading{title}{date}{subtitle}{location}` — dated role/education entry
-  - `\resumeSubheadingB{title}{date}{org}` — single-line role with `org` after a `|`
-  - `\resumeProjectHeading{heading}{date}` — project entry
-  - `\resumeItem{...}` — a bullet (wrap groups in `\resumeItemListStart` / `...End`)
-- `resume-dirty.tex` keeps a lot of content commented out (`%`) — an archive of
-  alternate bullet phrasings. `resume.tex` has those stripped for a clean source.
-- Packages in use include `fontawesome5`, `charter` (font), `marvosym`, `hyperref`,
-  `titlesec`, `enumitem`. All ship with MacTeX-full.
-- Keep it to **one page**. After editing, rebuild and confirm `pdfinfo resume.pdf`
-  still reports `Pages: 1`.
+- Keep it to **one page**. After editing, confirm `pdfinfo build/resume.pdf` still
+  reports `Pages: 1`.
+- Bullets must each fit on **one rendered line** — long bullets silently wrap. When in
+  doubt, build and eyeball the PDF (or measure against the ~507pt line width).
+- Based on the [Jake Gutierrez résumé template](https://github.com/sb2nov/resume) (MIT).
+  Layout is driven by preamble macros (`\resumeSubheading`, `\resumeSubheadingB`,
+  `\resumeProjectHeading`, `\resumeItem`); `md2tex.py` emits these for you.
+- Packages used (`fontawesome5`, `charter`, `marvosym`, `hyperref`, `titlesec`,
+  `enumitem`, …) all ship with MacTeX-full.
 
 ## Dependencies
 
-- MacTeX (full): `brew install --cask mactex-no-gui`
-- VSCode extension: `james-yu.latex-workshop`
+Tested versions (nearby versions should work):
+
+- **MacTeX (no GUI)** `2026.0324` — TeX Live 2026 (`latexmk` 4.88, `pdfTeX` 1.40.29):
+  `brew install --cask mactex-no-gui`
+- **Python** `3.10.17` (3.8+) — standard library only, no `pip install`
+- **Bash** `5.2` (3.2+) — runs `scripts/watch.sh`
+- **VSCode** `1.125.1` + **LaTeX Workshop** ext `james-yu.latex-workshop@10.16.1` —
+  `code --install-extension james-yu.latex-workshop`
+- **Poppler** (optional, dev only) — `pdfinfo`/`pdftoppm` for page-count & pixel checks:
+  `brew install poppler`

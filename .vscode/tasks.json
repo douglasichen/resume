@@ -5,7 +5,7 @@
       "label": "Resume: watch md → pdf",
       "detail": "Auto-rebuilds build/resume.pdf whenever resume.md is saved.",
       "type": "shell",
-      "command": "./watch.sh",
+      "command": "./scripts/watch.sh",
       "isBackground": true,
       "runOptions": { "runOn": "folderOpen" },
       "presentation": {

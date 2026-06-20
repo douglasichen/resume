@@ -4,13 +4,13 @@
 # Pipeline: resume.md --md2tex.py--> resume.tex --latexmk--> build/resume.pdf
 #
 # Zero dependencies: polls the file's modification time once a second.
-# Run manually with:  ./watch.sh
+# Run manually with:  ./scripts/watch.sh   (from the repo root, or from anywhere)
 
-cd "$(dirname "$0")" || exit 1
+cd "$(dirname "$0")/.." || exit 1   # repo root (this script lives in scripts/)
 export PATH="/Library/TeX/texbin:$PATH"
 
 build() {
-  python3 md2tex.py resume.md resume.tex \
+  python3 scripts/md2tex.py resume.md resume.tex \
     && latexmk -pdf -interaction=nonstopmode resume.tex
 }
 
