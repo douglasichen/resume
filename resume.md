@@ -38,12 +38,11 @@
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
 ## Hackathon Wins
-### 1st Place, Best Game Project @ nwHacks | Dance CV -- AI dance coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
-### 1st Place, Best Use of Fetch.ai @ KickStart | LeetCode for dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
-### 1st Place, Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI cooking coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
+### 1st Place, Best Game Project @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
+### 1st Place, Best Use of Fetch.ai @ KickStart | LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
+### 1st Place, Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
 
 ## Leadership
 ### Program Leader | Shad Canada |
-- Dedicated **90+ hours/week** to facilitate a month-long STEAM program for student-led entrepreneurship projects
-- Delivered a workshop on the applications and safety of AI, attracting **25+** students to attend a follow-up session
-: \vspace{-6pt}
+- Dedicated **90 hours/week** to facilitate a month-long STEAM program for student-led entrepreneurship projects
+- Designed and led a workshop on the applications and safety of generative AI for **60+ highschool students**
