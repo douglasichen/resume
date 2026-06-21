@@ -29,7 +29,7 @@
 : \vspace{-10pt}
 
 ## Personal Projects
-### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Link](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
+### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [About](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
 - Built a serverless pipeline to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
