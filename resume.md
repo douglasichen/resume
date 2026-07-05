@@ -10,11 +10,11 @@
 
 ## Skills
 - Languages: TypeScript/JavaScript, Python, Java, C++, Shell Script, SQL, HTML/CSS
-- Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, Git, Node, React, Next, Jest, Puppeteer
+- Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, Git, NodeJS, React, Next, Jest, Puppeteer
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
-- Built an AI triage pipeline using decision trees to help resolve **60%** of customer tickets, saving the team **20 h/wk**
+- Built an AI triage pipeline using decision trees to help resolve **70%** of customer tickets, saving the team **20 h/wk**
 - Shipped a CI-integrated AI agent that flags and corrects risky PRs with **80%** accuracy across internal repos
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ h/mo** by building AWS infra to process **320K+ emails** using Lambda, SES, and Redis
@@ -29,10 +29,10 @@
 : \vspace{-10pt}
 
 ## Personal Projects
-### Resume Fact-Checker | TypeScript, React, Vite, AWS CDK, Tavily, Reducto, Resend | [About](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
+### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [About](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
 - Built a serverless pipeline to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
-### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Visit](https://www.freefoodatubc.ca/)
+### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
