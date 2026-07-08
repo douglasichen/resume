@@ -36,9 +36,11 @@
 ### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [About](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
 - Built a serverless infrastructure to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
-### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
-- Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
-- Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
+## Hackathon Wins
+### Best Game Project @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
+### Best Use of Fetch.ai @ KickStart | LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
+### Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
+: \vspace{-8pt}
 
 ## Leadership
 ### Program Leader | Shad Canada |
