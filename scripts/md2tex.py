@@ -110,6 +110,11 @@ def emit_bullets(items):
     # A ': raw' directive after the last bullet is attached to the
     # \resumeItemListEnd line (e.g. \resumeItemListEnd\vspace{-10pt}); one that
     # sits between bullets is emitted inline inside the list.
+    if not any(k == 'bullet' for k, _ in items):
+        # No bullets at all (e.g. a bare ': \vspace{..}' after a Hackathon Wins
+        # entry) -> emit directly, don't wrap an empty itemize (LaTeX errors on
+        # \end{itemize} with no \item).
+        return ['      ' + val for _, val in items]
     last_bullet = max((i for i, (k, _) in enumerate(items) if k == 'bullet'),
                       default=-1)
     inner, trailing = items[:last_bullet + 1], items[last_bullet + 1:]

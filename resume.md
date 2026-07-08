@@ -5,7 +5,7 @@
 - github.com/douglasichen | https://www.github.com/douglasichen
 
 ## Education
-### University of British Columbia | Vancouver, BC | Bachelor of Science in Computer Science, Co-op program | Sep 2023 -- Apr 2028
+### University of British Columbia | Vancouver, BC | Bachelor of Science in Computer Science, Co-op program, GPA: 3.7/4.0 | Sep 2023 -- Apr 2028
 - Courses: Object-Oriented Design, Algorithms & Data Structures, Operating Systems, Databases, Machine Learning
 
 ## Skills
@@ -31,15 +31,16 @@
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [About](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes with internet sources; hit **1.5K users** within 24 hours
-- Built a serverless pipeline to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
+- Built a serverless infrastructure to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
 ## Hackathon Wins
-### Winner (Best Game Project) @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
-### Winner (Best Use of Fetch.ai) @ KickStart | LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
-### Winner (Best Use of ElevenLabs) @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
+### Best Game Project @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
+### Best Use of Fetch.ai @ KickStart | LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
+### Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
+: \vspace{-8pt}
 
 ## Leadership
 ### Program Leader | Shad Canada |
