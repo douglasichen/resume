@@ -1,0 +1,208 @@
+
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\usepackage{graphicx}
+\input{glyphtounicode}
+
+\usepackage{eso-pic}
+
+\usepackage{charter}
+
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\usepackage{graphicx}
+\usepackage{fontawesome5}
+\newcommand{\externallink}[2]{%
+  \href{#1}{#2\,\faExternalLink[regular]}%
+}
+\newcommand{\smallericon}[1]{\texorpdfstring{\scalebox{0.7}{#1}}{#1}}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1.0in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-6pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-0.6pt}}
+  }
+}
+
+\newcommand{\urlNewWindowLabel}[2]{\href[pdfnewwindow=true]{#1}{#2}}
+
+\newcommand{\accomplishmentItem}[2]{
+  \item\small {
+    \begin{tabular*}{0.94\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubheadingD}[5]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-5pt}
+    \begin{itemize}[leftmargin=*]
+      \item \small #5
+    \end{itemize}\vspace{-5pt}
+}
+
+\newcommand{\resumeSubheadingB}[3]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{#3} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+\newcommand{\resumeSubheadingC}[4]{
+  \vspace{0pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} $|$ \textit{#3} $|$ \textit{#4} & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubSubheading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textit{\small#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeSubItem}[1]{\resumeItem{#1}\vspace{-4pt}}
+
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-7pt}}
+
+\begin{document}
+
+\begin{center}
+    \textbf{\Huge Douglas Chen} \\ \vspace{1pt}
+    \href{mailto:douglas@ichen.ca}{\underline{douglas@ichen.ca}} $|$
+    \href{https://www.douglaschen.ca/}{\underline{douglaschen.ca}} $|$
+    \href{https://www.linkedin.com/in/douglasichen/}{\underline{linkedin.com/in/douglasichen}} $|$
+    \href{https://www.github.com/douglasichen}{\underline{github.com/douglasichen}}
+\end{center}
+
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {University of British Columbia}{Vancouver, BC}
+      {Bachelor of Science in Computer Science, Co-op program, GPA: 3.7/4.0}{Sep 2023 -- Apr 2028}
+      \resumeItemListStart
+        \resumeItem{Courses: Algorithms \& Data Structures, Linear Algebra, Probability \& Statistics, Operating Systems}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+         \textbf{Languages:}{ C++, Python, Java, TypeScript/JavaScript, Shell Script, SQL} \\
+     \textbf{Frameworks/Tools:}{ AWS, PostgreSQL, Redis, Docker, Git} \\
+     \textbf{Competitive Programming:}{ LeetCode Knight (Top 6\%), DMOJ Candidate Master (Top 5\%), CCC Honour Roll 2023}
+    }}
+ \end{itemize}
+
+\section{Work Experience}
+  \resumeSubHeadingListStart
+    \resumeSubheadingB{Software Engineer Intern}{May 2026 -- Aug 2026}{NimbleRx (YC W15, Acquired)}
+      \resumeItemListStart
+        \resumeItem{Built an AI triage pipeline using decision trees to help resolve \textbf{70\%} of customer tickets, saving the team \textbf{20 h/wk}}
+        \resumeItem{Shipped a CI-integrated AI agent that flags and corrects risky PRs with \textbf{80\%} accuracy across internal repos}
+      \resumeItemListEnd
+    \resumeSubheadingB{Software Engineer Intern}{Jan 2025 -- Aug 2025}{InsideDesk}
+      \resumeItemListStart
+        \resumeItem{Saved clients \textbf{210+ h/mo} by building AWS infra to process \textbf{320K+ emails} using Lambda, SES, and Redis}
+        \resumeItem{Automated the collection of \textbf{1M+} claims from insurance portals by developing bots using JavaScript \& Puppeteer}
+        \resumeItem{Resolved a \textbf{3-year} QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by \textbf{20x}}
+      \resumeItemListEnd
+    \resumeSubheadingB{AI Consultant}{Sep 2024 -- Oct 2024}{Self-employed}
+      \resumeItemListStart
+        \resumeItem{Secured a \textbf{\$5K} contract with a dental software company to develop AI agents for insurance data management}
+        \resumeItem{Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by \textbf{3.5x}}
+      \resumeItemListEnd
+    \resumeSubheadingB{AI Software Engineer Intern}{May 2024 -- Aug 2024}{Exchange Solutions $|$ \underline{\href{https://www.youtube.com/watch?v=mMaEmro4iEw}{Demo}}}
+      \resumeItemListStart
+        \resumeItem{Developed a Human-in-the-loop AI agent that creates mobile app prototypes in \textbf{under 30 min} (JavaScript)}
+        \resumeItem{First intern to earn a \textbf{Bravo Certificate for Innovation} from senior management after demoing to \textbf{100+} co-workers}
+      \resumeItemListEnd\vspace{-10pt}
+  \resumeSubHeadingListEnd
+
+\section{Personal Projects}
+  \resumeSubHeadingListStart
+        \resumeProjectHeading
+          {\textbf{Neural Network From Scratch} $|$ \emph{C++ $|$ \href{https://github.com/douglasichen/Neural-Network-From-Scratch}{{\underline{Code}}}}}{}
+      \resumeItemListStart
+        \resumeItem{Implemented a neural network from scratch in C++ (forward/backprop, gradient descent), zero ML libraries}
+        \resumeItem{Built pre-LLM to internalize the linear algebra and calculus underlying modern deep learning}
+      \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Resume Fact-Checker} $|$ \emph{TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend $|$ \href{https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/}{{\underline{About}}}}}{}
+      \resumeItemListStart
+        \resumeItem{Launched an AI agent to fact-check resumes with internet sources; hit \textbf{1.5K users} within 24 hours}
+        \resumeItem{Built a serverless infrastructure to parse, store, and verify resumes using AWS Lambda, S3, and DynamoDB}
+      \resumeItemListEnd
+        \resumeProjectHeading
+          {\textbf{Free Food @ UBC} $|$ \emph{TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock \& API Gateway) $|$ \href{https://github.com/douglasichen/ubceventscdk}{{\underline{Code}}}}}{}
+      \resumeItemListStart
+        \resumeItem{Developed a platform to combat food insecurity for students by aggregating events with free food from \textbf{400+ orgs}}
+        \resumeItem{Automated web scraping pipeline using AWS to route, process, and store \textbf{5K+} Instagram posts}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+
+\section{Leadership}
+  \resumeSubHeadingListStart
+    \resumeSubheadingB{Program Leader}{}{Shad Canada}
+      \resumeItemListStart
+        \resumeItem{Dedicated \textbf{90 h/wk} to facilitate a month-long STEAM program for student-led entrepreneurship projects}
+        \resumeItem{Designed and led a workshop on the applications and safety of generative AI for \textbf{60+ highschool students}}
+      \resumeItemListEnd
+  \resumeSubHeadingListEnd
+\end{document}

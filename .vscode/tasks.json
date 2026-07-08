@@ -3,7 +3,7 @@
   "tasks": [
     {
       "label": "Resume: watch md → pdf",
-      "detail": "Auto-rebuilds build/resume.pdf whenever resume.md is saved.",
+      "detail": "Auto-rebuilds build/<variant>.pdf whenever any resumes/*.md is saved.",
       "type": "shell",
       "command": "./scripts/watch.sh",
       "isBackground": true,

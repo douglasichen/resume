@@ -1,36 +1,44 @@
 # Resume
 
-A one-page LaTeX résumé generated from a simple Markdown source.
+A one-page LaTeX résumé generated from a simple Markdown source. Multiple **variants**
+(e.g. general, quant-dev-targeted) live side by side in `resumes/`, each an independent
+Markdown source built to its own PDF.
 
 ```
-resume.md  ──(scripts/md2tex.py)──▶  resume.tex  ──(latexmk)──▶  build/resume.pdf
+resumes/general.md  ──(scripts/md2tex.py)──▶  resumes/general.tex  ──(latexmk)──▶  build/general.pdf
+resumes/quant.md    ──(scripts/md2tex.py)──▶  resumes/quant.tex    ──(latexmk)──▶  build/quant.pdf
 ```
 
 ## Files
 
-- **`resume.md`** — source of truth. **Edit this.**
-- **`scripts/md2tex.py`** — converts `resume.md` → LaTeX. The preamble + macros are baked
-  in; output is verified pixel-identical to the original hand-written resume.
-- **`scripts/watch.sh`** — zero-dependency watcher: on `resume.md` save, runs `md2tex.py` + `latexmk`.
+- **`resumes/*.md`** — source of truth, one file per variant. **Edit these.**
+  `general.md` is the default/base résumé; `quant.md` is retargeted for quant dev roles
+  (leads with C++, math coursework, competitive programming; trims web/AI-agent framing).
+- **`scripts/md2tex.py`** — converts a `resumes/*.md` → LaTeX. The preamble + macros are
+  baked in; output is verified pixel-identical to the original hand-written resume.
+- **`scripts/watch.sh`** — zero-dependency watcher: on any `resumes/*.md` save, runs
+  `md2tex.py` + `latexmk` for that variant only.
 - **`scripts/test_md2tex.py`** — test suite for the converter.
-- **`resume.tex`** — **generated** from `resume.md` on every build. Do **not** edit by
-  hand; changes get overwritten on the next rebuild.
+- **`resumes/*.tex`** — **generated** from the matching `resumes/*.md` on every build. Do
+  **not** edit by hand; changes get overwritten on the next rebuild.
 - **`resume-dirty.tex`** — archive of alternate bullet phrasings kept as LaTeX comments.
-  Mine it for wording, then edit `resume.md`.
+  Mine it for wording, then edit the relevant `resumes/*.md`.
 - **`.vscode/tasks.json`** — auto-starts the watcher when the folder is opened.
 - **`.latexmkrc`** — sends all build output into `build/`.
 - **`media/`** — screenshots used in `README.md`.
-- **`build/`** — compiled PDF + aux files (gitignored). The résumé is `build/resume.pdf`.
+- **`build/`** — compiled PDFs + aux files (gitignored), one PDF per variant, e.g.
+  `build/general.pdf`, `build/quant.pdf`.
 
 ## Workflow: edit Markdown, watch the PDF
 
 Open this folder in VSCode and the watcher starts automatically (`watch.sh`, via
-`.vscode/tasks.json` `runOn: folderOpen`). Edit `resume.md`, save, and
-`build/resume.pdf` rebuilds — no terminal needed. The first time, VSCode asks to
+`.vscode/tasks.json` `runOn: folderOpen`). Edit any `resumes/*.md`, save, and its
+`build/<variant>.pdf` rebuilds — no terminal needed. The first time, VSCode asks to
 **"Allow Automatic Tasks"**; allow it once.
 
-Recommended layout: `resume.md` on the left, `build/resume.pdf` (LaTeX Workshop's
-viewer, which auto-refreshes) on the right. You never touch the `.tex`.
+Recommended layout: `resumes/general.md` (or `resumes/quant.md`) on the left,
+`build/general.pdf` (LaTeX Workshop's viewer, which auto-refreshes) on the right. You
+never touch the `.tex`.
 
 Run the watcher by hand: `./scripts/watch.sh`. Stop the auto-start: delete `.vscode/tasks.json`.
 
@@ -39,9 +47,9 @@ Run the watcher by hand: `./scripts/watch.sh`. Stop the auto-start: delete `.vsc
 Requires a TeX distribution (MacTeX); the engine lives at `/Library/TeX/texbin`.
 
 ```sh
-python3 scripts/md2tex.py resume.md resume.tex && latexmk resume.tex   # -> build/resume.pdf
-latexmk -c    # delete aux files in build/ (keep the PDF)
-latexmk -C    # delete everything generated, including the PDF
+python3 scripts/md2tex.py resumes/general.md resumes/general.tex && latexmk resumes/general.tex   # -> build/general.pdf
+latexmk -c    # delete aux files in build/ (keep the PDFs)
+latexmk -C    # delete everything generated, including the PDFs
 ```
 
 If `latexmk` is "not found", MacTeX isn't on your PATH — restart the terminal, or:
@@ -81,7 +89,7 @@ end-to-end LaTeX compilation of adversarial inputs.
 
 ## Editing / template notes
 
-- Keep it to **one page**. After editing, confirm `pdfinfo build/resume.pdf` still
+- Keep it to **one page**. After editing, confirm `pdfinfo build/<variant>.pdf` still
   reports `Pages: 1`.
 - Bullets must each fit on **one rendered line** — long bullets silently wrap. When in
   doubt, build and eyeball the PDF (or measure against the ~507pt line width).
