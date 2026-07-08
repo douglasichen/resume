@@ -5,14 +5,14 @@ A one-page LaTeX résumé generated from a simple Markdown source. Multiple **va
 Markdown source built to its own PDF.
 
 ```
-resumes/general.md  ──(scripts/md2tex.py)──▶  resumes/general.tex  ──(latexmk)──▶  build/general.pdf
-resumes/quant.md    ──(scripts/md2tex.py)──▶  resumes/quant.tex    ──(latexmk)──▶  build/quant.pdf
+resumes/general.md       ──(scripts/md2tex.py)──▶  resumes/general.tex       ──(latexmk)──▶  build/general.pdf
+resumes/quant-resume.md  ──(scripts/md2tex.py)──▶  resumes/quant-resume.tex  ──(latexmk)──▶  build/quant-resume.pdf
 ```
 
 ## Files
 
 - **`resumes/*.md`** — source of truth, one file per variant. **Edit these.**
-  `general.md` is the default/base résumé; `quant.md` is retargeted for quant dev roles
+  `general.md` is the default/base résumé; `quant-resume.md` is retargeted for quant dev roles
   (leads with C++, math coursework, competitive programming; trims web/AI-agent framing).
 - **`scripts/md2tex.py`** — converts a `resumes/*.md` → LaTeX. The preamble + macros are
   baked in; output is verified pixel-identical to the original hand-written resume.
@@ -27,7 +27,7 @@ resumes/quant.md    ──(scripts/md2tex.py)──▶  resumes/quant.tex    ─
 - **`.latexmkrc`** — sends all build output into `build/`.
 - **`media/`** — screenshots used in `README.md`.
 - **`build/`** — compiled PDFs + aux files (gitignored), one PDF per variant, e.g.
-  `build/general.pdf`, `build/quant.pdf`.
+  `build/general.pdf`, `build/quant-resume.pdf`.
 
 ## Workflow: edit Markdown, watch the PDF
 
@@ -36,7 +36,7 @@ Open this folder in VSCode and the watcher starts automatically (`watch.sh`, via
 `build/<variant>.pdf` rebuilds — no terminal needed. The first time, VSCode asks to
 **"Allow Automatic Tasks"**; allow it once.
 
-Recommended layout: `resumes/general.md` (or `resumes/quant.md`) on the left,
+Recommended layout: `resumes/general.md` (or `resumes/quant-resume.md`) on the left,
 `build/general.pdf` (LaTeX Workshop's viewer, which auto-refreshes) on the right. You
 never touch the `.tex`.
 

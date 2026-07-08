@@ -3,11 +3,11 @@
 My résumé, written in **Markdown** and compiled to a polished one-page PDF through
 LaTeX. Edit a file in `resumes/`, save, and its PDF rebuilds itself — you never have to
 touch the LaTeX. Multiple variants live side by side: `resumes/general.md` is the
-default résumé, `resumes/quant.md` is retargeted for quant dev roles.
+default résumé, `resumes/quant-resume.md` is retargeted for quant dev roles.
 
 ```
-resumes/general.md  ──(scripts/md2tex.py)──▶  resumes/general.tex  ──(latexmk)──▶  build/general.pdf
-resumes/quant.md    ──(scripts/md2tex.py)──▶  resumes/quant.tex    ──(latexmk)──▶  build/quant.pdf
+resumes/general.md       ──(scripts/md2tex.py)──▶  resumes/general.tex       ──(latexmk)──▶  build/general.pdf
+resumes/quant-resume.md  ──(scripts/md2tex.py)──▶  resumes/quant-resume.tex  ──(latexmk)──▶  build/quant-resume.pdf
 ```
 
 ![Editing a résumé in resumes/ on the left, live PDF preview on the right](media/image.png)
@@ -18,7 +18,7 @@ resumes/quant.md    ──(scripts/md2tex.py)──▶  resumes/quant.tex    ─
 # one-off build  ->  build/general.pdf
 python3 scripts/md2tex.py resumes/general.md resumes/general.tex && latexmk resumes/general.tex
 
-# or just edit resumes/general.md (or resumes/quant.md) in VSCode — see "Auto-rebuild" below
+# or just edit resumes/general.md (or resumes/quant-resume.md) in VSCode — see "Auto-rebuild" below
 ```
 
 You need a TeX distribution. On macOS:
@@ -87,7 +87,7 @@ being wrapped in an empty bullet list.
 
 | Path | Purpose |
 |------|---------|
-| `resumes/*.md` | **Source of truth**, one file per variant (`general.md`, `quant.md`, ...). Edit these. |
+| `resumes/*.md` | **Source of truth**, one file per variant (`general.md`, `quant-resume.md`, ...). Edit these. |
 | `scripts/md2tex.py` | Markdown → LaTeX converter (preamble baked in; output matches the generated `.tex` 1:1). |
 | `scripts/watch.sh` | Zero-dependency file watcher that rebuilds whichever variant changed. |
 | `scripts/test_md2tex.py` | Test suite for the converter (`python3 scripts/test_md2tex.py`). |
@@ -155,7 +155,7 @@ Then just edit a file in `resumes/` and the watcher does the rest.
 - The pixel-identical check (render both PDFs to images, compare hashes) is how this repo
   was validated — ask Claude to do the same so you can trust the conversion.
 - Don't edit a `resumes/*.tex` file by hand afterward; it's regenerated from the matching `.md`.
-- Want a role-targeted variant (like `resumes/quant.md`)? Copy `resumes/general.md` to a
+- Want a role-targeted variant (like `resumes/quant-resume.md`)? Copy `resumes/general.md` to a
   new file and ask Claude to reframe it — it'll reuse the same converter and watcher.
 
 ## Credits

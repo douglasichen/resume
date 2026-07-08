@@ -11,7 +11,7 @@
 ## Skills
 - Languages: C++, Python, Java, TypeScript/JavaScript, Shell Script, SQL
 - Frameworks/Tools: AWS, PostgreSQL, Redis, Docker, Git
-- Competitive Programming: LeetCode Knight (Top 6%), DMOJ Candidate Master (Top 5%), CCC Honour Roll 2023
+- Competitive Programming: LeetCode Knight (Top 6%), DMOJ Candidate Master (Top 5%), CCC Honour Roll (Top 6%)
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
