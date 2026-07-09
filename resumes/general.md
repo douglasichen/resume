@@ -1,6 +1,5 @@
 # Douglas Chen
 - douglas@ichen.ca | mailto:douglas@ichen.ca
-- douglaschen.ca | https://www.douglaschen.ca/
 - linkedin.com/in/douglasichen | https://www.linkedin.com/in/douglasichen/
 - github.com/douglasichen | https://www.github.com/douglasichen
 
@@ -9,22 +8,23 @@
 - Courses: Object-Oriented Design, Algorithms & Data Structures, Operating Systems, Databases, Machine Learning
 
 ## Skills
-- Languages: TypeScript/JavaScript, Python, Java, C++, Shell Script, SQL, HTML/CSS
-- Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, Git, NodeJS, React, Next, Jest, Puppeteer
+- Languages: TypeScript/JavaScript, Python, Java, Shell Script, SQL, HTML/CSS
+- Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, GitHub Actions, Git, NodeJS, React, Next, Jest, Puppeteer, Playwright
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
-- Built an AI triage pipeline using decision trees to help resolve **70%** of customer tickets, saving the team **20 h/wk**
-- Shipped a CI-integrated AI agent that flags and corrects risky PRs with **80%** accuracy across internal repos
+- Shipped the context harness for an AI Agent that corrects risky PRs with **80%** accuracy across internal repos
+- Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings
+- Designed database schemas and CRUD endpoints to store/access customer tickets in PostgreSQL
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
-- Saved clients **210+ h/mo** by building AWS infra to process **320K+ emails** using Lambda, SES, and Redis
-- Automated the collection of **1M+** claims from insurance portals by developing bots using JavaScript & Puppeteer
-- Resolved a **3-year** QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by **20x**
+- Saved clients **210+ h/mo** by building infra (Lambda & Redis) to process **320K+ emails** and route 2FA codes to webscrapers
+- Resolved a QA bottleneck by writing Python scripts to automate manual work, speeding up a testing process by **20x**
+- Developed webscrapers using JavaScript & Puppeteer to automated the collection of **1M+** insurance claims
 ### AI Consultant | Self-employed | Sep 2024 -- Oct 2024
-- Secured a **$5K** contract with a dental software company to develop AI agents for insurance data management
-- Engineered an LLM chunking algorithm to process large PDFs, improving data extraction accuracy by **3.5x**
+- Secured a **$5K** contract with a dental software company to build AI agents to manage insurance data
+- Engineered a semantic-chunking algorithm to process large PDFs, improving extraction accuracy **3.5x**
 ### AI Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
-- Developed a Human-in-the-loop AI agent that creates mobile app prototypes in **under 30 min** (JavaScript)
+- Built an AI Agent that generates mobile app prototypes for **60+ stakeholders** using React Native and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
 : \vspace{-10pt}
 
@@ -36,9 +36,10 @@
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
+
 ## Hackathon Wins
 ### Best Game Project @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv)
-### Best Use of Fetch.ai @ KickStart | LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
+### Best Use of Fetch.ai @ KickStart | ELOv -- LeetCode for Dating, 15K views, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov)
 ### Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d)
 : \vspace{-8pt}
 
@@ -46,3 +47,4 @@
 ### Program Leader | Shad Canada |
 - Dedicated **90 h/wk** to facilitate a month-long STEAM program for student-led entrepreneurship projects
 - Designed and led a workshop on the applications and safety of generative AI for **60+ highschool students**
+
