@@ -18,7 +18,7 @@ Markdown schema
 Section field meanings (by section title):
   Education          -> ### org | location | degree | dates
   Skills             -> - Label: comma, separated, values   (no ### entries)
-  Personal Projects  -> ### name | tech stack | [label](url)
+  Personal Projects  -> ### name | tech stack | [label](url) [label2](url2) ...
   everything else    -> ### title | org | dates             (org may end with [label](url))
 
 Text is auto-escaped for LaTeX (& % $ # _) and **bold** becomes \textbf{...}.
@@ -68,6 +68,11 @@ def split_link(s):
     if not m:
         return s.strip(), None, None
     return s[:m.start()].strip(), m.group(1), m.group(2)
+
+
+def split_links(s):
+    """Return every [label](url) in s, e.g. "[Code](u1) [Launch Post](u2)"."""
+    return [(m.group(1), m.group(2)) for m in LINK.finditer(s)]
 
 
 def fields(line):
@@ -161,11 +166,13 @@ def emit_entry(sectype, entry):
         out.append('    \\resumeSubheading')
         out.append('      {' + conv(g(0)) + '}{' + conv(g(1)) + '}')
         out.append('      {' + conv(g(2)) + '}{' + conv(g(3)) + '}')
-    elif sectype == 'project':             # name | stack | [label](url)
-        _, label, url = split_link(g(2))
+    elif sectype == 'project':             # name | stack | [label](url) [label2](url2) ...
+        links = split_links(g(2))
         emph = conv(g(1))
-        if url:
-            emph += ' $|$ \\href{' + esc_url(url) + '}{{\\underline{' + conv(label) + '}}}'
+        if links:
+            emph += ' $|$ ' + ' $|$ '.join(
+                '\\href{' + esc_url(url) + '}{{\\underline{' + conv(label) + '}}}'
+                for label, url in links)
         out.append('        \\resumeProjectHeading')
         out.append('          {\\textbf{' + conv(g(0)) + '} $|$ \\emph{' + emph + '}}{}')
     else:                                  # subheadingB: title | org | dates

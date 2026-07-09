@@ -109,6 +109,16 @@ projN = M.emit_entry("project", {"header": "MyApp | TS, React", "items": []})
 check("entry/proj: no link -> no href",
       "href" not in "\n".join(projN), "\n".join(projN))
 
+projM = M.emit_entry("project",
+                     {"header": "MyApp | TS, React | [Code](http://g.com/x) [Launch Post](http://l.com/y)",
+                      "items": []})
+pjm = "\n".join(projM)
+check("entry/proj: two links both rendered",
+      r"\href{http://g.com/x}{{\underline{Code}}}" in pjm
+      and r"\href{http://l.com/y}{{\underline{Launch Post}}}" in pjm, pjm)
+check("entry/proj: two links joined with $|$",
+      r"{{\underline{Code}}} $|$ \href{http://l.com/y}" in pjm, pjm)
+
 expO = M.emit_entry("subheadingB",
                     {"header": "Engineer | Acme [Demo](http://d.com) | 2024", "items": []})
 ex = "\n".join(expO)
