@@ -1,24 +1,22 @@
 # Résumé
 
 My résumé, written in **Markdown** and compiled to a polished one-page PDF through
-LaTeX. Edit a file in `resumes/`, save, and its PDF rebuilds itself — you never have to
-touch the LaTeX. Multiple variants live side by side: `resumes/general.md` is the
-default résumé, `resumes/quant-resume.md` is retargeted for quant dev roles.
+LaTeX. Edit `resumes/resume.md`, save, and its PDF rebuilds itself — you never have to
+touch the LaTeX.
 
 ```
-resumes/general.md       ──(scripts/md2tex.py)──▶  resumes/general.tex       ──(latexmk)──▶  build/general.pdf
-resumes/quant-resume.md  ──(scripts/md2tex.py)──▶  resumes/quant-resume.tex  ──(latexmk)──▶  build/quant-resume.pdf
+resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ──(latexmk)──▶  build/resume.pdf
 ```
 
-![Editing a résumé in resumes/ on the left, live PDF preview on the right](media/image.png)
+![Editing the résumé in resumes/ on the left, live PDF preview on the right](media/image.png)
 
 ## Quick start
 
 ```sh
-# one-off build  ->  build/general.pdf
-python3 scripts/md2tex.py resumes/general.md resumes/general.tex && latexmk resumes/general.tex
+# one-off build  ->  build/resume.pdf
+python3 scripts/md2tex.py resumes/resume.md resumes/resume.tex && latexmk resumes/resume.tex
 
-# or just edit resumes/general.md (or resumes/quant-resume.md) in VSCode — see "Auto-rebuild" below
+# or just edit resumes/resume.md in VSCode — see "Auto-rebuild" below
 ```
 
 You need a TeX distribution. On macOS:
@@ -38,21 +36,21 @@ code --install-extension james-yu.latex-workshop
 ```
 
 - **LaTeX Workshop** (`james-yu.latex-workshop`) — gives you the in-editor PDF pane that
-  **auto-refreshes** whenever the matching `build/<variant>.pdf` changes. That's the
-  right-hand window in the screenshot above. (This repo's `settings.json` already points
-  it at `latexmk` and the `build/` output folder.)
+  **auto-refreshes** whenever `build/resume.pdf` changes. That's the right-hand window in
+  the screenshot above. (This repo's `settings.json` already points it at `latexmk` and
+  the `build/` output folder.)
 
 Markdown editing needs **no** extension — it's built into VSCode. Open the PDF preview
-with `Cmd+Option+V` (or click the preview icon on a `resumes/*.tex` / `build/*.pdf`).
+with `Cmd+Option+V` (or click the preview icon on `resumes/resume.tex` / `build/resume.pdf`).
 
 ### Auto-rebuild
 
 Open this folder in VSCode and a watcher starts automatically (`scripts/watch.sh`, wired
-up in `.vscode/tasks.json` via `runOn: folderOpen`). Every time you save any file in
-`resumes/`, it regenerates that variant's LaTeX and recompiles its PDF. The first time,
-VSCode asks to **"Allow Automatic Tasks"** — allow it once.
+up in `.vscode/tasks.json` via `runOn: folderOpen`). Every time you save `resumes/resume.md`,
+it regenerates the LaTeX and recompiles the PDF. The first time, VSCode asks to
+**"Allow Automatic Tasks"** — allow it once.
 
-Recommended layout (as pictured): `resumes/general.md` on the left, `build/general.pdf`
+Recommended layout (as pictured): `resumes/resume.md` on the left, `build/resume.pdf`
 open in the LaTeX Workshop viewer on the right.
 
 Run the watcher by hand instead: `./scripts/watch.sh` (zero dependencies — it polls the
@@ -87,16 +85,16 @@ being wrapped in an empty bullet list.
 
 | Path | Purpose |
 |------|---------|
-| `resumes/*.md` | **Source of truth**, one file per variant (`general.md`, `quant-resume.md`, ...). Edit these. |
+| `resumes/resume.md` | **Source of truth.** Edit this. |
 | `scripts/md2tex.py` | Markdown → LaTeX converter (preamble baked in; output matches the generated `.tex` 1:1). |
-| `scripts/watch.sh` | Zero-dependency file watcher that rebuilds whichever variant changed. |
+| `scripts/watch.sh` | Zero-dependency file watcher that rebuilds on save. |
 | `scripts/test_md2tex.py` | Test suite for the converter (`python3 scripts/test_md2tex.py`). |
-| `resumes/*.tex` | **Generated** from the matching `resumes/*.md` on each build — don't edit by hand. |
+| `resumes/resume.tex` | **Generated** from `resumes/resume.md` on each build — don't edit by hand. |
 | `resume-dirty.tex` | Full archive of alternate bullet phrasings, kept as LaTeX comments. |
 | `.vscode/tasks.json` | Auto-starts the watcher when the folder is opened. |
 | `.latexmkrc` | Sends all build output to `build/`. |
 | `media/` | Screenshots used in this README. |
-| `build/` | Compiled PDFs + aux files (gitignored), one PDF per variant. |
+| `build/` | Compiled PDF + aux files (gitignored). |
 
 ## Tests
 
@@ -140,23 +138,21 @@ do the conversion for you.
 
    > Re-bake `scripts/md2tex.py` to use `mytemplate.tex` as the LaTeX preamble and macros
    > instead of the current one. Adapt the section dispatch (`sectype_for`) and entry
-   > emitters (`emit_*`) to match its commands, put my content in `resumes/general.md`,
-   > then regenerate `resumes/general.tex` and verify the rendered PDF is pixel-identical
+   > emitters (`emit_*`) to match its commands, put my content in `resumes/resume.md`,
+   > then regenerate `resumes/resume.tex` and verify the rendered PDF is pixel-identical
    > to compiling `mytemplate.tex` directly. Keep `scripts/test_md2tex.py` green.
 
 3. Claude Code swaps the baked-in preamble, rewrites the emitters to fit your template's
    macros, updates the section names, and confirms the output matches.
 
-Then just edit a file in `resumes/` and the watcher does the rest.
+Then just edit `resumes/resume.md` and the watcher does the rest.
 
 **Tips**
 - Tell Claude which `md2tex.py` entry format each of your sections should use if you have
   unusual ones (e.g. *Publications*, *Awards*).
 - The pixel-identical check (render both PDFs to images, compare hashes) is how this repo
   was validated — ask Claude to do the same so you can trust the conversion.
-- Don't edit a `resumes/*.tex` file by hand afterward; it's regenerated from the matching `.md`.
-- Want a role-targeted variant (like `resumes/quant-resume.md`)? Copy `resumes/general.md` to a
-  new file and ask Claude to reframe it — it'll reuse the same converter and watcher.
+- Don't edit `resumes/resume.tex` by hand afterward; it's regenerated from the `.md`.
 
 ## Credits
 
