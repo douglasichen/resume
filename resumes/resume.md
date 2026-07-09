@@ -13,7 +13,7 @@
 - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings
 - Designed database schemas and CRUD endpoints to store/access customer tickets in PostgreSQL
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
-- Saved clients **210+ h/mo** by building infra (Lambda & Redis) to process **320K+ emails** and route 2FA codes to webscrapers
+- Saved clients **210+ h/mo** by building infrastructure to process **320K+ emails** and route 2FA codes to webscrapers
 - Resolved a QA bottleneck by writing Python scripts to automate manual work, speeding up a testing process by **20x**
 - Developed webscrapers using JavaScript & Puppeteer to automated the collection of **1M+** insurance claims
 ### AI Consultant | Self-employed | Sep 2024 -- Oct 2024
@@ -46,7 +46,7 @@
 
 ## Skills
 - Languages: TypeScript/JavaScript, Python, Java, C++, SQL, HTML/CSS, Shell Script
-- Frameworks: React, Next.js, Node.js, Express, Vite, Jest, Puppeteer
+- Frameworks: React, Next.js, Node.js, Express, Spring, Vite, Jest, Puppeteer, Playwright
 - Cloud/Infra: AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker
 - DevOps: Git, GitHub Actions, Bitbucket Pipelines
-- AI/ML: LLM Agents, RAG, Vector Search & Embeddings, Prompt Engineering, Semantic Chunking
+- AI/ML: AI Agents, RAG, Vector Search & Embeddings
