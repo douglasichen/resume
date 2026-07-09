@@ -11,7 +11,7 @@
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
 - Built the context harness for an AI PR-review agent processing **320+ PRs/week**, flagging blockers pre-merge in CI
 - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings
-- Designed database schemas and CRUD endpoints to store/access customer tickets in PostgreSQL
+- Identified and patched a login enumeration vulnerability, securing **3M+** user accounts
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ h/mo** by building infrastructure to process **320K+ emails** and route 2FA codes to webscrapers
 - Resolved a QA bottleneck by writing Python scripts to automate manual work, speeding up a testing process by **20x**
