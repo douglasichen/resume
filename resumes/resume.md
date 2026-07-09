@@ -7,10 +7,6 @@
 ### University of British Columbia | Vancouver, BC | Bachelor of Science in Computer Science, Co-op program, GPA: 3.7/4.0 | Sep 2023 -- Apr 2028
 - Courses: Object-Oriented Design, Algorithms & Data Structures, Operating Systems, Databases, Machine Learning
 
-## Skills
-- Languages: TypeScript/JavaScript, Python, Java, Shell Script, SQL, HTML/CSS
-- Frameworks/Tools: AWS, Redis, PostgreSQL, Docker, Bitbucket Pipelines, GitHub Actions, Git, NodeJS, React, Next, Jest, Puppeteer, Playwright
-
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
 - Shipped the context harness for an AI Agent that corrects risky PRs with **80%** accuracy across internal repos
@@ -48,3 +44,9 @@
 - Dedicated **90 h/wk** to facilitate a month-long STEAM program for student-led entrepreneurship projects
 - Designed and led a workshop on the applications and safety of generative AI for **60+ highschool students**
 
+## Skills
+- Languages: TypeScript/JavaScript, Python, Java, C++, SQL, HTML/CSS, Shell Script
+- Frameworks: React, Next.js, Node.js, Express, Vite, Jest, Puppeteer
+- Cloud/Infra: AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker
+- DevOps: Git, GitHub Actions, Bitbucket Pipelines
+- AI/ML: LLM Agents, RAG, Vector Search & Embeddings, Prompt Engineering, Semantic Chunking
