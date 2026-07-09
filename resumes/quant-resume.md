@@ -1,6 +1,6 @@
 # Douglas Chen
 - douglas@ichen.ca | mailto:douglas@ichen.ca
-- douglaschen.ca | https://www.douglaschen.ca/
+<!-- - douglaschen.ca | https://www.douglaschen.ca/ -->
 - linkedin.com/in/douglasichen | https://www.linkedin.com/in/douglasichen/
 - github.com/douglasichen | https://www.github.com/douglasichen
 
@@ -15,17 +15,17 @@
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
-- Built a decision-tree classifier to triage customer tickets, resolving **70%** autonomously and saving **20 h/wk**
+- Sped up search query to surface similar customer tickets by **50x** by implementing vector search with embeddings
 - Shipped an LLM-based CI pipeline that flags and auto-corrects risky PRs with **80%** accuracy across internal repos
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
-- Saved clients **210+ h/mo** via an event-driven AWS pipeline (Lambda, SES, Redis) processing **320K+ emails/mo**
-- Automated collection of **1M+** insurance claims via headless-browser scrapers (JavaScript, Puppeteer)
-- Resolved a **3-year** QA bottleneck with PostgreSQL + Python automation, a **20x** speedup
+- Built infrastructure to process **320K+ emails/month**, routing 2FA code to webscrapers using SQS and Redis
+- Resolved a **3-year** QA bottleneck with PostgreSQL and Python scripts, speeding up a key testing process by **20x**
+- Developed webscrapers using JavaScript to automated the collection of **1M+** insurance claims
 ### AI Consultant | Self-employed | Sep 2024 -- Oct 2024
 - Secured a **$5K** contract with a dental software company to build LLM-based agents for insurance data management
 - Engineered a semantic-chunking algorithm for large-PDF ingestion, improving extraction accuracy **3.5x**
 ### AI Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
-- Built a human-in-the-loop LLM pipeline that generates mobile app prototypes in **under 30 min** (JavaScript)
+- Built an AI Agent that generates mobile app prototypes using React Native and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
 : \vspace{-10pt}
 
