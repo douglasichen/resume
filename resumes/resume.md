@@ -10,15 +10,18 @@
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
 - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings
-- Built the context harness for an AI PR-review agent processing **320+ PRs/week**, flagging blockers pre-merge in CI
-- Identified and patched a login enumeration vulnerability, securing **11M** user accounts
+- Built the context harness for an AI PR-review agent processing **300+ PRs/week**, flagging blockers pre-merge in CI
+- Identified and patched a login enumeration vulnerability, closing an exposure across an **11M**-user account base
+
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Saved clients **210+ h/mo** by building infrastructure to process **320K+ emails** and route 2FA codes to webscrapers
 - Resolved a QA bottleneck by writing Python scripts to automate manual work, speeding up a testing process by **20x**
 - Developed webscrapers using JavaScript & Puppeteer to automate the collection of **1M+** insurance claims
+
 ### Software Consultant | Self-employed | Sep 2024 -- Oct 2024
 - Secured a **$5K** contract with a dental software company to automate insurance data management
-- Engineered a semantic-chunking algorithm to process large PDFs, improving extraction accuracy **3.5x**
+- Engineered a semantic-chunking algorithm that improved data extraction accuracy from **78% to 96%** on large PDFs
+
 ### Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
 - Built a mobile app prototyping tool for **60+ stakeholders** using React Native and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
@@ -28,6 +31,7 @@
 ### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes against internet sources; hit **1.5K users** within 24 hours
 - Built a serverless infrastructure to parse, store, and verify **1.8K** resumes using AWS Lambda, S3, and DynamoDB
+
 ### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
