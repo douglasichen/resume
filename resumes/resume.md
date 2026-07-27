@@ -25,7 +25,7 @@
 ### Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
 - Built a mobile app prototyping tool for **60+ stakeholders** using React Native and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
-: \vspace{-10pt}
+<!-- : \vspace{-10pt} -->
 
 ## Personal Projects
 ### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
