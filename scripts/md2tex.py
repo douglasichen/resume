@@ -5,15 +5,20 @@ Usage:
     python3 md2tex.py resume.md            # writes LaTeX to stdout
     python3 md2tex.py resume.md out.tex    # writes LaTeX to out.tex
 
+Also writes a clean Markdown copy under build/ (alongside the PDF):
+    resumes/resume.md  ->  build/clean-resume.md
+stripping HTML comments and `: \\vspace{...}` layout directives. Do not edit
+build/clean-*.md by hand — regenerated on every md2tex run.
+
 Markdown schema
 ---------------
   # Name                         -> centered name
   - display | url                -> a contact link (one per line, under the name)
 
-  ## Section                     -> \section{...}
+  ## Section                     -> \\section{...}
   ### a | b | c [| d]            -> an entry header (field meaning depends on section)
   - bullet text                  -> a resume bullet (**bold** supported)
-  : \rawlatex                    -> inject raw LaTeX at this point (e.g. \vspace{-12pt})
+  : \\rawlatex                   -> inject raw LaTeX at this point (e.g. \\vspace{-12pt})
 
 Section field meanings (by section title):
   Education          -> ### org | location | degree | dates
@@ -21,11 +26,13 @@ Section field meanings (by section title):
   Personal Projects  -> ### name | tech stack | [label](url) [label2](url2) ...
   everything else    -> ### title | org | dates             (org may end with [label](url))
 
-Text is auto-escaped for LaTeX (& % $ # _) and **bold** becomes \textbf{...}.
-The preamble and \end{document} are baked in verbatim, so output matches the
+Text is auto-escaped for LaTeX (& % $ # _) and **bold** becomes \\textbf{...}.
+The preamble and \\end{document} are baked in verbatim, so output matches the
 hand-written resume.tex layout.
 """
-import sys, re
+import os
+import sys
+import re
 
 PREAMBLE = "\n\\documentclass[letterpaper,11pt]{article}\n\n\\usepackage{latexsym}\n\\usepackage[empty]{fullpage}\n\\usepackage{titlesec}\n\\usepackage{marvosym}\n\\usepackage[usenames,dvipsnames]{color}\n\\usepackage{verbatim}\n\\usepackage{enumitem}\n\\usepackage[hidelinks]{hyperref}\n\\usepackage{fancyhdr}\n\\usepackage[english]{babel}\n\\usepackage{tabularx}\n\\usepackage{graphicx}\n\\input{glyphtounicode}\n\n\\usepackage{eso-pic}\n\n\\usepackage{charter}\n\n\\pagestyle{fancy}\n\\fancyhf{} % clear all header and footer fields\n\\fancyfoot{}\n\\renewcommand{\\headrulewidth}{0pt}\n\\renewcommand{\\footrulewidth}{0pt}\n\n\\usepackage{graphicx}\n\\usepackage{fontawesome5}\n\\newcommand{\\externallink}[2]{%\n  \\href{#1}{#2\\,\\faExternalLink[regular]}%\n}\n\\newcommand{\\smallericon}[1]{\\texorpdfstring{\\scalebox{0.7}{#1}}{#1}}\n\n\\addtolength{\\oddsidemargin}{-0.5in}\n\\addtolength{\\evensidemargin}{-0.5in}\n\\addtolength{\\textwidth}{1.0in}\n\\addtolength{\\topmargin}{-.5in}\n\\addtolength{\\textheight}{1.0in}\n\n\\urlstyle{same}\n\n\\raggedbottom\n\\raggedright\n\\setlength{\\tabcolsep}{0in}\n\n\\titleformat{\\section}{\n  \\vspace{-6pt}\\scshape\\raggedright\\large\n}{}{0em}{}[\\color{black}\\titlerule \\vspace{-5pt}]\n\n\\pdfgentounicode=1\n\n\\newcommand{\\resumeItem}[1]{\n  \\item\\small{\n    {#1\\vspace{-0.6pt}}\n  }\n}\n\n\\newcommand{\\urlNewWindowLabel}[2]{\\href[pdfnewwindow=true]{#1}{#2}}\n\n\\newcommand{\\accomplishmentItem}[2]{\n  \\item\\small {\n    \\begin{tabular*}{0.94\\textwidth}{l@{\\extracolsep{\\fill}}r}\n      \\small#1 & #2 \\\\\n    \\end{tabular*}\\vspace{-7pt}\n  }\n}\n\n\\newcommand{\\resumeSubheading}[4]{\n  \\vspace{0pt}\\item\n    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} & #2 \\\\\n      \\textit{\\small#3} & \\textit{\\small #4} \\\\\n    \\end{tabular*}\\vspace{-7pt}\n}\n\n\\newcommand{\\resumeSubheadingD}[5]{\n  \\vspace{0pt}\\item\n    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} & #2 \\\\\n      \\textit{\\small#3} & \\textit{\\small #4} \\\\\n    \\end{tabular*}\\vspace{-5pt}\n    \\begin{itemize}[leftmargin=*]\n      \\item \\small #5\n    \\end{itemize}\\vspace{-5pt}\n}\n\n\\newcommand{\\resumeSubheadingB}[3]{\n  \\vspace{0pt}\\item\n    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} $|$ \\textit{#3} & #2 \\\\\n    \\end{tabular*}\\vspace{-7pt}\n}\n\\newcommand{\\resumeSubheadingC}[4]{\n  \\vspace{0pt}\\item\n    \\begin{tabular*}{0.97\\textwidth}[t]{l@{\\extracolsep{\\fill}}r}\n      \\textbf{#1} $|$ \\textit{#3} $|$ \\textit{#4} & #2 \\\\\n    \\end{tabular*}\\vspace{-7pt}\n}\n\n\\newcommand{\\resumeSubSubheading}[2]{\n    \\item\n    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}\n      \\textit{\\small#1} & \\textit{\\small #2} \\\\\n    \\end{tabular*}\\vspace{-7pt}\n}\n\n\\newcommand{\\resumeProjectHeading}[2]{\n    \\item\n    \\begin{tabular*}{0.97\\textwidth}{l@{\\extracolsep{\\fill}}r}\n      \\small#1 & #2 \\\\\n    \\end{tabular*}\\vspace{-7pt}\n}\n\n\\newcommand{\\resumeSubItem}[1]{\\resumeItem{#1}\\vspace{-4pt}}\n\n\\renewcommand\\labelitemii{$\\vcenter{\\hbox{\\tiny$\\bullet$}}$}\n\n\\newcommand{\\resumeSubHeadingListStart}{\\begin{itemize}[leftmargin=0.15in, label={}]}\n\\newcommand{\\resumeSubHeadingListEnd}{\\end{itemize}}\n\\newcommand{\\resumeItemListStart}{\\begin{itemize}}\n\\newcommand{\\resumeItemListEnd}{\\end{itemize}\\vspace{-7pt}}\n\n\\begin{document}\n"
 FOOTER = "\\end{document}\n"
@@ -229,11 +236,70 @@ def emit(doc):
     return '\n'.join(out)
 
 
+_FULL_HTML_COMMENT = re.compile(r'^\s*<!--.*?-->\s*$')
+# Layout-only directives kept in the source for LaTeX, dropped from clean MD.
+_RAW_VSPACE = re.compile(r'^\s*:\s*\\vspace\b')
+
+
+def clean_md(text):
+    """Copy of resume.md without HTML comments or : \\vspace layout lines.
+
+    Collapses consecutive blank lines so removing comments does not leave gaps.
+    """
+    kept = []
+    for line in text.splitlines():
+        if _FULL_HTML_COMMENT.match(line):
+            continue
+        if _RAW_VSPACE.match(line):
+            continue
+        kept.append(line.rstrip())
+    # Collapse runs of blank lines to a single blank.
+    out = []
+    prev_blank = False
+    for line in kept:
+        blank = not line.strip()
+        if blank and prev_blank:
+            continue
+        out.append(line)
+        prev_blank = blank
+    while out and not out[0].strip():
+        out.pop(0)
+    while out and not out[-1].strip():
+        out.pop()
+    return '\n'.join(out) + ('\n' if out else '')
+
+
+def clean_md_path(src_path):
+    """resumes/resume.md -> build/clean-resume.md (repo build dir).
+
+    Resolves the repo root as the parent of a resumes/ directory when present,
+    otherwise uses the current working directory. Returns None if the source
+    is already a clean-* file (should not be re-cleaned).
+    """
+    base = os.path.basename(src_path)
+    if base.startswith('clean-'):
+        return None
+    stem = base[:-3] if base.endswith('.md') else base
+    abs_src = os.path.abspath(src_path)
+    src_dir = os.path.dirname(abs_src)
+    if os.path.basename(src_dir) == 'resumes':
+        root = os.path.dirname(src_dir)
+    else:
+        root = os.getcwd()
+    return os.path.join(root, 'build', 'clean-' + stem + '.md')
+
+
 def main():
     if len(sys.argv) < 2:
         sys.stderr.write('usage: md2tex.py resume.md [out.tex]\n')
         sys.exit(1)
-    doc = parse(open(sys.argv[1]).read())
+    src_path = sys.argv[1]
+    src = open(src_path).read()
+    clean_path = clean_md_path(src_path)
+    if clean_path is not None:
+        os.makedirs(os.path.dirname(clean_path), exist_ok=True)
+        open(clean_path, 'w').write(clean_md(src))
+    doc = parse(src)
     tex = PREAMBLE + emit(doc) + FOOTER
     if len(sys.argv) > 2:
         open(sys.argv[2], 'w').write(tex)

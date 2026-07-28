@@ -4,13 +4,18 @@ A one-page LaTeX résumé generated from a simple Markdown source.
 
 ```
 resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ──(latexmk)──▶  build/resume.pdf
+                 └─────────────────────▶  build/clean-resume.md
 ```
 
 ## Files
 
 - **`resumes/resume.md`** — source of truth. **Edit this.**
-- **`scripts/md2tex.py`** — converts `resumes/resume.md` → LaTeX. The preamble + macros are
-  baked in; output is verified pixel-identical to the original hand-written resume.
+- **`build/clean-resume.md`** — **generated** shareable markdown: same content without
+  `<!-- comments -->` or `: \vspace{...}` lines. Regenerated whenever `md2tex.py` runs
+  (lives next to the PDF under `build/`).
+- **`scripts/md2tex.py`** — converts `resumes/resume.md` → LaTeX (+ clean markdown). The
+  preamble + macros are baked in; output is verified pixel-identical to the original
+  hand-written resume.
 - **`scripts/watch.sh`** — zero-dependency watcher: on save, runs `md2tex.py` + `latexmk`.
 - **`scripts/test_md2tex.py`** — test suite for the converter + PDF structural validity.
 - **`scripts/pdf_valid.py`** — rejects PDFs with junk after `%%EOF` / broken xref.

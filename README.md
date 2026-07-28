@@ -6,6 +6,7 @@ touch the LaTeX.
 
 ```
 resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ──(latexmk)──▶  build/resume.pdf
+                 └─────────────────────▶  build/clean-resume.md   (no HTML comments / vspace)
 ```
 
 ![Editing the résumé in resumes/ on the left, live PDF preview on the right](media/image.png)
@@ -86,7 +87,8 @@ being wrapped in an empty bullet list.
 | Path | Purpose |
 |------|---------|
 | `resumes/resume.md` | **Source of truth.** Edit this. |
-| `scripts/md2tex.py` | Markdown → LaTeX converter (preamble baked in; output matches the generated `.tex` 1:1). |
+| `build/clean-resume.md` | **Generated** clean copy of the source (HTML comments + `: \\vspace{...}` stripped). Don't edit. |
+| `scripts/md2tex.py` | Markdown → LaTeX converter (also writes `build/clean-*.md`). |
 | `scripts/watch.sh` | Zero-dependency file watcher that rebuilds on save. |
 | `scripts/test_md2tex.py` | Test suite for the converter + PDF validity (`python3 scripts/test_md2tex.py`). |
 | `scripts/pdf_valid.py` | Structural PDF check. Runs async after every latexmk success (`.latexmkrc`). Manual: `python3 scripts/pdf_valid.py build/resume.pdf`. |

@@ -12,9 +12,9 @@
 <!-- - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings -->
 - Engineered context harness for AI code review agent processing **290+ PRs/week**, flagging merge blockers in CI
 <!-- - Identified and patched a login enumeration vulnerability, closing an exposure across an **11M**-user account base -->
-- Built repeatable regression tests for **6 AI features** using cosine similarity between embeddings to reduce flakiness
+- Built repeatable regression tests for **6 AI features** using cosine similarity between vector embeddings and an LLM judge to tolerate semantically equivalent outputs
 <!-- - Developed Spring Boot services and AI Agent to automatically triage customer tickets in under **150 seconds** -->
-- Patched a login-enumeration vulnerability by enforcing byte-identical API response for incorrect email/password, protecting **11M user accounts** from being identified by attackers
+- Patched a login-enumeration vulnerability by enforcing byte-identical API responses for invalid email/password, protecting **11M user accounts** from being identified by attackers
 
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Unblocked web scrapers stopped by 2FA by building AWS infrastructure to process **53K emails/month** and route verification codes through Redis
@@ -26,25 +26,25 @@
 - Secured a **$5K** contract to automate insurance workflows by building software to extract data from PDF documents
 - Engineered a semantic-chunking algorithm that improved data extraction accuracy from **78% to 96%** on large PDFs
 
-### Software Engineer Intern | Exchange Solutions [Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
+### Software Engineer Intern | Exchange Solutions [Project Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
 - Built a mobile app prototyping tool for **60+ stakeholders** using React Native and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
 <!-- : \vspace{-10pt} -->
 
 ## Personal Projects
-### Resume Fact-Checker | TypeScript, NodeJS, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
-- Launched an AI agent to fact-check resumes against internet sources; hit **1.5K users** within 24 hours
-- Built a serverless infrastructure to parse, store, and verify **1.8K** resumes using AWS Lambda, S3, and DynamoDB
+### Resume Fact-Checker | TypeScript, Node.js, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
+- Launched an AI agent to fact-check resumes against internet sources; reached **1.5K registered users** in 24 hours
+- Built a serverless infrastructure to parse, store, and verify **1.8K resumes** using AWS Lambda, S3, and DynamoDB
 
-### Free Food @ UBC | TypeScript, React, Vite, Google Analytics, AWS (Lambda, SQS, Dynamo, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
+### Free Food @ UBC | TypeScript, React, Vite, AWS (Lambda, SQS, DynamoDB, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
 - Automated web scraping pipeline using AWS to route, process, and store **5K+** Instagram posts
-- Avoided proxy cost by self-hosting and leveraging web previews for cheap and reliable Instagram scraping
+<!-- - Avoided proxy cost by self-hosting and leveraging web previews for cheap and reliable Instagram scraping -->
 - Drove **3K visits** and **100+ active users** in under 2 weeks through organic marketing on social media
 
 ## Hackathon Wins
 ### Best Game Project @ nwHacks | Dance CV -- AI Dance Coach, 630+ contestants | [Devpost](https://devpost.com/software/dance-cv) | [Code](https://github.com/douglasichen/DanceCV)
-### Best Use of Fetch.ai @ KickStart | ELOv -- LeetCode for Dating, 140+ users, 17-min user session | [Devpost](https://devpost.com/software/elov) | [Code](https://github.com/douglasichen/ELOv)
+### Best Use of Fetch.ai @ KickStart | ELOv -- LeetCode for Dating, 140+ users, 17-min avg user session | [Devpost](https://devpost.com/software/elov) | [Code](https://github.com/douglasichen/ELOv)
 ### Best Use of ElevenLabs @ Hack the Coast | ChefMate -- AI Cooking Coach | [Devpost](https://devpost.com/software/chefmate-j0mh5d) | [Code](https://github.com/douglasichen/HTC2026)
 : \vspace{-8pt}
 

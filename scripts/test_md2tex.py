@@ -234,6 +234,57 @@ check("edge: backslash escaped",
       r"\textbackslash" in bs,
       f"NOT escaped -> {bs!r} (would break LaTeX)")
 
+# ---------------------------------------------------------------- clean_md()
+eq("clean: drops full-line HTML comments",
+   M.clean_md("# N\n<!-- - old bullet -->\n- keep\n"),
+   "# N\n- keep\n")
+eq("clean: drops : \\vspace lines",
+   M.clean_md("# N\n- b\n: \\vspace{-8pt}\n\n## S\n"),
+   "# N\n- b\n\n## S\n")
+eq("clean: drops commented vspace",
+   M.clean_md("# N\n<!-- : \\vspace{-10pt} -->\n## S\n"),
+   "# N\n## S\n")
+eq("clean: collapses blank runs left by removed comments",
+   M.clean_md("# N\n\n<!-- x -->\n\n- b\n"),
+   "# N\n\n- b\n")
+eq("clean: keeps real bullets and links",
+   M.clean_md("### Job | Org [Demo](http://x.com) | 2024\n- did **thing**\n"),
+   "### Job | Org [Demo](http://x.com) | 2024\n- did **thing**\n")
+# Path layout: .../resumes/resume.md -> .../build/clean-resume.md
+with tempfile.TemporaryDirectory() as d:
+    resumes_dir = os.path.join(d, "resumes")
+    os.makedirs(resumes_dir)
+    src = os.path.join(resumes_dir, "resume.md")
+    open(src, "w").write("# A\n")
+    cp = M.clean_md_path(src)
+    eq("clean_md_path: basename is clean-resume.md",
+       os.path.basename(cp), "clean-resume.md")
+    eq("clean_md_path: lives under build/",
+       os.path.basename(os.path.dirname(cp)), "build")
+    eq("clean_md_path: build is sibling of resumes/",
+       os.path.dirname(os.path.dirname(cp)), d)
+
+eq("clean_md_path: clean-* is not re-cleaned",
+   M.clean_md_path("build/clean-resume.md"),
+   None)
+
+# Round-trip: writing clean file under build/ next to a resumes/ source.
+with tempfile.TemporaryDirectory() as d:
+    resumes_dir = os.path.join(d, "resumes")
+    os.makedirs(resumes_dir)
+    src = os.path.join(resumes_dir, "resume.md")
+    open(src, "w").write("# A\n<!-- hide -->\n- show\n: \\vspace{-1pt}\n")
+    cp = M.clean_md_path(src)
+    os.makedirs(os.path.dirname(cp), exist_ok=True)
+    open(cp, "w").write(M.clean_md(open(src).read()))
+    check("clean: writes build/clean-resume.md",
+          os.path.isfile(cp)
+          and os.path.basename(cp) == "clean-resume.md"
+          and os.path.basename(os.path.dirname(cp)) == "build")
+    eq("clean: build copy content stripped",
+       open(cp).read(),
+       "# A\n- show\n")
+
 # ---------------------------------------------------------------- PDF validity
 # Minimal classic-xref PDF (offsets must match body layout).
 _MIN_PDF_BODY = b"""\
