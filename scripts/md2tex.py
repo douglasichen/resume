@@ -166,8 +166,13 @@ def emit_entry(sectype, entry):
         out.append('    \\resumeSubheading')
         out.append('      {' + conv(g(0)) + '}{' + conv(g(1)) + '}')
         out.append('      {' + conv(g(2)) + '}{' + conv(g(3)) + '}')
-    elif sectype == 'project':             # name | stack | [label](url) [label2](url2) ...
-        links = split_links(g(2))
+    elif sectype == 'project':             # name | stack | [label](url) ...
+        # Links may be space-separated in field 2, or each in its own | field:
+        #   name | stack | [Code](u1) [Launch](u2)
+        #   name | stack | [Devpost](u1) | [Code](u2)
+        links = []
+        for i in range(2, len(f)):
+            links.extend(split_links(f[i]))
         emph = conv(g(1))
         if links:
             emph += ' $|$ ' + ' $|$ '.join(

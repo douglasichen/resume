@@ -119,6 +119,16 @@ check("entry/proj: two links both rendered",
 check("entry/proj: two links joined with $|$",
       r"{{\underline{Code}}} $|$ \href{http://l.com/y}" in pjm, pjm)
 
+projPipe = M.emit_entry("project",
+                        {"header": "Dance CV | AI coach | [Devpost](http://d.com/x) | [Code](http://g.com/y)",
+                         "items": []})
+pjp = "\n".join(projPipe)
+check("entry/proj: pipe-separated links both rendered",
+      r"\href{http://d.com/x}{{\underline{Devpost}}}" in pjp
+      and r"\href{http://g.com/y}{{\underline{Code}}}" in pjp, pjp)
+check("entry/proj: pipe-separated links joined with $|$",
+      r"{{\underline{Devpost}}} $|$ \href{http://g.com/y}" in pjp, pjp)
+
 expO = M.emit_entry("subheadingB",
                     {"header": "Engineer | Acme [Demo](http://d.com) | 2024", "items": []})
 ex = "\n".join(expO)
