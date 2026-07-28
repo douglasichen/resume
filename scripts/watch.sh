@@ -2,6 +2,7 @@
 # Auto-rebuild every résumé variant whenever its .md changes.
 # Started automatically by VSCode when this folder opens (see .vscode/tasks.json).
 # Pipeline: resumes/X.md --md2tex.py--> resumes/X.tex --latexmk--> build/X.pdf
+#           (+ async pdf_valid via .latexmkrc $success_cmd — do not ship INVALID PDFs)
 #
 # Zero dependencies: polls each file's modification time once a second.
 # Run manually with:  ./scripts/watch.sh   (from the repo root, or from anywhere)
@@ -12,6 +13,8 @@ export PATH="/Library/TeX/texbin:$PATH"
 build() {
   local md="$1" name
   name=$(basename "$md" .md)
+  # latexmk's $success_cmd (see .latexmkrc) spawns pdf_valid.py --async on the
+  # output PDF after every successful compile — covers watch, CLI, and LaTeX Workshop.
   python3 scripts/md2tex.py "$md" "resumes/$name.tex" \
     && latexmk -pdf -interaction=nonstopmode "resumes/$name.tex"
 }

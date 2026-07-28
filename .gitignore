@@ -1,6 +1,9 @@
 # All compiled output (PDF + aux files) goes here via .latexmkrc ($out_dir = 'build')
 build/
 
+# Sidecar written by scripts/pdf_valid.py when a PDF fails structural checks
+*.pdf.INVALID
+
 # Stray LaTeX artifacts, in case something compiles outside build/
 *.aux
 *.fdb_latexmk

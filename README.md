@@ -88,11 +88,12 @@ being wrapped in an empty bullet list.
 | `resumes/resume.md` | **Source of truth.** Edit this. |
 | `scripts/md2tex.py` | Markdown → LaTeX converter (preamble baked in; output matches the generated `.tex` 1:1). |
 | `scripts/watch.sh` | Zero-dependency file watcher that rebuilds on save. |
-| `scripts/test_md2tex.py` | Test suite for the converter (`python3 scripts/test_md2tex.py`). |
+| `scripts/test_md2tex.py` | Test suite for the converter + PDF validity (`python3 scripts/test_md2tex.py`). |
+| `scripts/pdf_valid.py` | Structural PDF check. Runs async after every latexmk success (`.latexmkrc`). Manual: `python3 scripts/pdf_valid.py build/resume.pdf`. |
 | `resumes/resume.tex` | **Generated** from `resumes/resume.md` on each build — don't edit by hand. |
 | `resume-dirty.tex` | Full archive of alternate bullet phrasings, kept as LaTeX comments. |
 | `.vscode/tasks.json` | Auto-starts the watcher when the folder is opened. |
-| `.latexmkrc` | Sends all build output to `build/`. |
+| `.latexmkrc` | Sends all build output to `build/`; runs `pdf_valid.py --async` on success. |
 | `media/` | Screenshots used in this README. |
 | `build/` | Compiled PDF + aux files (gitignored). |
 
@@ -102,8 +103,10 @@ being wrapped in an empty bullet list.
 python3 scripts/test_md2tex.py
 ```
 
-Covers escaping, bold, links, field parsing, section dispatch, spacing directives, and
-end-to-end LaTeX compilation of adversarial inputs. Uses only the Python standard library.
+Covers escaping, bold, links, field parsing, section dispatch, spacing directives,
+end-to-end LaTeX compilation of adversarial inputs, and PDF structure checks (so a
+corrupt file that Preview still opens fails the suite / `scripts/pdf_valid.py`).
+Uses only the Python standard library.
 
 ## Dependencies
 

@@ -12,7 +12,7 @@
 <!-- - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings -->
 - Engineered context harness for AI code review agent processing **290+ PRs/week**, flagging merge blockers in CI
 <!-- - Identified and patched a login enumeration vulnerability, closing an exposure across an **11M**-user account base -->
-- Built repeatable regression tests for **6 AI-powered features** by using vector comparison to prevent flaky results
+- Built repeatable regression tests for **6 AI features** using cosine similarity between embeddings to reduce flakiness
 <!-- - Developed Spring Boot services and AI Agent to automatically triage customer tickets in under **150 seconds** -->
 - Patched a login-enumeration vulnerability by enforcing byte-identical API response for incorrect email/password, protecting **11M user accounts** from being identified by attackers
 

@@ -12,13 +12,17 @@ resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ─�
 - **`scripts/md2tex.py`** — converts `resumes/resume.md` → LaTeX. The preamble + macros are
   baked in; output is verified pixel-identical to the original hand-written resume.
 - **`scripts/watch.sh`** — zero-dependency watcher: on save, runs `md2tex.py` + `latexmk`.
-- **`scripts/test_md2tex.py`** — test suite for the converter.
+- **`scripts/test_md2tex.py`** — test suite for the converter + PDF structural validity.
+- **`scripts/pdf_valid.py`** — rejects PDFs with junk after `%%EOF` / broken xref.
+  Runs **async after every successful latexmk** via `.latexmkrc` `$success_cmd`
+  (watch, CLI, LaTeX Workshop). On failure: loud log + macOS notification +
+  `build/<name>.pdf.INVALID` sidecar — do not send that PDF out.
 - **`resumes/resume.tex`** — **generated** from `resumes/resume.md` on every build. Do
   **not** edit by hand; changes get overwritten on the next rebuild.
 - **`resume-dirty.tex`** — archive of alternate bullet phrasings kept as LaTeX comments.
   Mine it for wording, then edit `resumes/resume.md`.
 - **`.vscode/tasks.json`** — auto-starts the watcher when the folder is opened.
-- **`.latexmkrc`** — sends all build output into `build/`.
+- **`.latexmkrc`** — sends all build output into `build/`; hooks async PDF validation.
 - **`media/`** — screenshots used in `README.md`.
 - **`build/`** — compiled PDF + aux files (gitignored): `build/resume.pdf`.
 
@@ -76,8 +80,8 @@ If `latexmk` is "not found", MacTeX isn't on your PATH — restart the terminal,
 python3 scripts/test_md2tex.py
 ```
 
-Covers escaping, bold, links, field parsing, section dispatch, spacing directives, and
-end-to-end LaTeX compilation of adversarial inputs.
+Covers escaping, bold, links, field parsing, section dispatch, spacing directives,
+end-to-end LaTeX compilation, and PDF structural validity (`scripts/pdf_valid.py`).
 
 ## Editing / template notes
 

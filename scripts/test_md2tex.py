@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
-"""Test suite for md2tex.py.
+"""Test suite for md2tex.py (and PDF structural validity).
 
 Covers unit behaviour (escaping, bold, links, field splitting, section dispatch,
-directives) and end-to-end LaTeX compilation of adversarial inputs.
+directives), end-to-end LaTeX compilation of adversarial inputs, and PDF
+structure checks so resume checkers don't reject a corrupt file that Preview
+still opens.
 
 Run:  python3 test_md2tex.py
 """
@@ -14,9 +16,14 @@ import sys
 import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+REPO = os.path.dirname(HERE)
 spec = importlib.util.spec_from_file_location("md2tex", os.path.join(HERE, "md2tex.py"))
 M = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(M)
+spec_pdf = importlib.util.spec_from_file_location(
+    "pdf_valid", os.path.join(HERE, "pdf_valid.py"))
+PV = importlib.util.module_from_spec(spec_pdf)
+spec_pdf.loader.exec_module(PV)
 
 # ---------------------------------------------------------------- test harness
 _passed = []
@@ -227,6 +234,148 @@ check("edge: backslash escaped",
       r"\textbackslash" in bs,
       f"NOT escaped -> {bs!r} (would break LaTeX)")
 
+# ---------------------------------------------------------------- PDF validity
+# Minimal classic-xref PDF (offsets must match body layout).
+_MIN_PDF_BODY = b"""\
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] >>
+endobj
+"""
+
+
+def _classic_pdf() -> bytes:
+    """Build a tiny well-formed PDF with a classic xref table."""
+    body = _MIN_PDF_BODY
+    # Object starts for xref (byte offsets of "N 0 obj" lines).
+    offs = [body.find(b"%d 0 obj" % n) for n in (1, 2, 3)]
+    xref_off = len(body)
+    xref = [b"xref\n0 4\n", b"0000000000 65535 f \n"]
+    for o in offs:
+        xref.append(f"{o:010d} 00000 n \n".encode())
+    xref_block = b"".join(xref)
+    trailer = (
+        b"trailer\n<< /Size 4 /Root 1 0 R >>\n"
+        b"startxref\n" + str(xref_off).encode() + b"\n%%EOF\n"
+    )
+    return body + xref_block + trailer
+
+
+def _xref_stream_pdf() -> bytes:
+    """Build a tiny PDF whose startxref points at a /Type /XRef stream obj.
+
+    Layout mirrors pdfTeX output (compressed xref stream at end).
+    """
+    # Body objects first; then a stub xref stream object; startxref -> that obj.
+    body = (
+        b"%PDF-1.7\n"
+        b"1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n"
+        b"2 0 obj\n<< /Type /Pages /Kids [] /Count 0 >>\nendobj\n"
+    )
+    xref_obj_off = len(body)
+    # Empty stream is fine for structure checks; we only require /Type /XRef.
+    xref_obj = (
+        b"3 0 obj\n"
+        b"<< /Type /XRef /Size 4 /W [1 1 1] /Root 1 0 R /Length 0 >>\n"
+        b"stream\n"
+        b"endstream\n"
+        b"endobj\n"
+    )
+    tail = b"startxref\n" + str(xref_obj_off).encode() + b"\n%%EOF\n"
+    return body + xref_obj + tail
+
+
+good = _classic_pdf()
+eq("pdf: classic well-formed has no issues", PV.pdf_issues(good), [])
+check("pdf: classic is_valid_pdf", PV.is_valid_pdf(good))
+
+good_stream = _xref_stream_pdf()
+eq("pdf: xref-stream well-formed has no issues", PV.pdf_issues(good_stream), [])
+
+# Regression: the failure mode resume checkers hit — valid PDF + junk + broken
+# second startxref/%%EOF so the final trailer points into a content stream.
+corrupt = good + b"FB3EFDBEA\x00\x01GARBAGE\nstartxref\n12\n%%EOF\n"
+issues = PV.pdf_issues(corrupt)
+check("pdf: junk-after-EOF is invalid", not PV.is_valid_pdf(corrupt), issues)
+check("pdf: junk-after-EOF reports junk",
+      any("junk after first %%EOF" in i for i in issues), issues)
+check("pdf: junk-after-EOF reports multiple %%EOF",
+      any("expected 1 %%EOF" in i for i in issues), issues)
+check("pdf: junk-after-EOF reports multiple startxref",
+      any("expected 1 startxref" in i for i in issues), issues)
+
+# startxref pointing into the middle of a stream/object (not an xref).
+bad_ptr = (
+    b"%PDF-1.7\n"
+    b"1 0 obj\n<< /Type /Catalog >>\nendobj\n"
+    b"stream\nNOT_AN_XREF_TABLE_HERE\nendstream\n"
+    b"startxref\n" + str(len(b"%PDF-1.7\n1 0 obj\n<< /Type /Catalog >>\nendobj\n"))
+    .encode() + b"\n%%EOF\n"
+)
+bad_ptr_issues = PV.pdf_issues(bad_ptr)
+check("pdf: startxref into stream body is invalid",
+      not PV.is_valid_pdf(bad_ptr), bad_ptr_issues)
+check("pdf: bad startxref target is reported",
+      any("does not point" in i or "without /Type /XRef" in i for i in bad_ptr_issues),
+      bad_ptr_issues)
+
+eq("pdf: missing header",
+   PV.pdf_issues(b"not a pdf%%EOF\n")[0].startswith("missing %PDF-"), True)
+check("pdf: empty is invalid", not PV.is_valid_pdf(b""))
+
+# Truncating at the first %%EOF of a corrupt file must restore validity
+# (the recovery path we used when diagnosing the checker rejection).
+first_eof = corrupt.find(b"%%EOF")
+recovered = corrupt[: first_eof + 5] + b"\n"
+check("pdf: truncate-at-first-EOF recovers classic PDF",
+      PV.is_valid_pdf(recovered), PV.pdf_issues(recovered))
+
+# check_file + .INVALID marker lifecycle (what runs after every latexmk success).
+with tempfile.TemporaryDirectory() as d:
+    good_path = os.path.join(d, "good.pdf")
+    bad_path = os.path.join(d, "bad.pdf")
+    open(good_path, "wb").write(good)
+    open(bad_path, "wb").write(corrupt)
+    # Silence notifications / stdout noise for the unit checks.
+    rc_ok = PV.check_file(good_path)
+    rc_bad = PV.check_file(bad_path)
+    check("pdf: check_file ok exits 0", rc_ok == 0, f"rc={rc_ok}")
+    check("pdf: check_file bad exits 1", rc_bad == 1, f"rc={rc_bad}")
+    check("pdf: no .INVALID marker on success",
+          not os.path.exists(PV.marker_path(good_path)))
+    check("pdf: writes .INVALID marker on failure",
+          os.path.exists(PV.marker_path(bad_path)))
+    # A later successful check must clear a prior marker.
+    open(bad_path, "wb").write(good)
+    PV.check_file(bad_path)
+    check("pdf: success clears prior .INVALID marker",
+          not os.path.exists(PV.marker_path(bad_path)))
+
+# --async must return immediately with 0 and still produce the check result.
+with tempfile.TemporaryDirectory() as d:
+    p = os.path.join(d, "async.pdf")
+    open(p, "wb").write(corrupt)
+    rc = subprocess.run(
+        [sys.executable, os.path.join(HERE, "pdf_valid.py"), "--async", p],
+        capture_output=True, text=True, timeout=5,
+    )
+    check("pdf: --async exits 0 immediately", rc.returncode == 0, rc.stderr)
+    # Wait for the detached child to finish writing the marker.
+    mark = PV.marker_path(p)
+    for _ in range(50):
+        if os.path.exists(mark):
+            break
+        import time
+        time.sleep(0.05)
+    check("pdf: --async child writes .INVALID for corrupt PDF",
+          os.path.exists(mark), f"marker missing after wait; stderr={rc.stderr!r}")
+
 # ---------------------------------------------------------------- COMPILE tests
 def compile_ok(md_text, label):
     tex = M.PREAMBLE + M.emit(M.parse(md_text)) + M.FOOTER
@@ -238,13 +387,19 @@ def compile_ok(md_text, label):
             ["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error",
              "-outdir=" + d, tf],
             cwd=d, env=env, capture_output=True, text=True)
-        ok = r.returncode == 0 and os.path.exists(os.path.join(d, "t.pdf"))
+        pdf_path = os.path.join(d, "t.pdf")
+        ok = r.returncode == 0 and os.path.exists(pdf_path)
         detail = ""
         if not ok:
             errs = [l for l in (r.stdout + r.stderr).splitlines()
                     if l.startswith("!") or "Error" in l or ".tex:" in l]
             detail = "\n        ".join(errs[:6]) or "(no pdf produced)"
         check("compile: " + label, ok, detail)
+        if ok:
+            pdf_bytes = open(pdf_path, "rb").read()
+            pi = PV.pdf_issues(pdf_bytes)
+            check("compile/pdf-valid: " + label, not pi,
+                  "\n        ".join(pi) if pi else "")
 
 
 have_latexmk = subprocess.run(["bash", "-lc", "PATH=/Library/TeX/texbin:$PATH which latexmk"],
@@ -252,6 +407,49 @@ have_latexmk = subprocess.run(["bash", "-lc", "PATH=/Library/TeX/texbin:$PATH wh
 if not have_latexmk:
     print("[skip] latexmk not found -- skipping compilation tests")
 else:
+    # Regression: $success_cmd in .latexmkrc must fire pdf_valid after a real build.
+    # Build a minimal doc from the repo root so .latexmkrc is picked up, then wait
+    # for the async child to leave (or not leave) a .INVALID marker.
+    def latexmk_success_cmd_runs_validator():
+        import time
+        with tempfile.TemporaryDirectory() as d:
+            # Copy the real .latexmkrc behaviour: out_dir + success_cmd, but write
+            # into this temp dir so we don't clobber build/.
+            md = "# Async Check\n- a@b.com | mailto:a@b.com\n\n## Work Experience\n### R | O | 2024\n- bullet\n"
+            tex = M.PREAMBLE + M.emit(M.parse(md)) + M.FOOTER
+            tex_path = os.path.join(d, "t.tex")
+            open(tex_path, "w").write(tex)
+            rc_path = os.path.join(d, ".latexmkrc")
+            # success_cmd path must resolve pdf_valid.py from the repo scripts/.
+            valid_py = os.path.join(HERE, "pdf_valid.py")
+            open(rc_path, "w").write(
+                f"$out_dir = '.';\n"
+                f"$pdf_mode = 1;\n"
+                f"$success_cmd = 'python3 {valid_py} --async %D';\n"
+            )
+            env = dict(os.environ, PATH="/Library/TeX/texbin:" + os.environ.get("PATH", ""))
+            r = subprocess.run(
+                ["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error",
+                 "-r", rc_path, tex_path],
+                cwd=d, env=env, capture_output=True, text=True, timeout=120,
+            )
+            pdf_path = os.path.join(d, "t.pdf")
+            if r.returncode != 0 or not os.path.exists(pdf_path):
+                check("latexmk/success_cmd: build produced pdf", False,
+                      (r.stdout + r.stderr)[-500:])
+                return
+            # Async child should clear/never write INVALID for a good PDF; give it a moment.
+            mark = PV.marker_path(pdf_path)
+            time.sleep(0.3)
+            # Also require the PDF itself is structurally valid (sync check).
+            pi = PV.pdf_issues(open(pdf_path, "rb").read())
+            check("latexmk/success_cmd: produced PDF is well-formed", not pi,
+                  "\n        ".join(pi) if pi else "")
+            check("latexmk/success_cmd: no .INVALID marker after good build",
+                  not os.path.exists(mark))
+
+    latexmk_success_cmd_runs_validator()
+
     compile_ok("""# Test Person
 - t@x.com | mailto:t@x.com
 
@@ -280,6 +478,21 @@ else:
 ### Role | Org | 2024
 - One simple bullet
 """, "minimal document")
+
+    # Full real resume source — catches layout/content regressions that also
+    # produce a checker-rejected PDF.
+    real_md = os.path.join(REPO, "resumes", "resume.md")
+    if os.path.isfile(real_md):
+        compile_ok(open(real_md).read(), "real resumes/resume.md")
+
+# If build/resume.pdf already exists (dev machine mid-edit), refuse a corrupt one.
+built = os.path.join(REPO, "build", "resume.pdf")
+if os.path.isfile(built):
+    bi = PV.pdf_issues(open(built, "rb").read())
+    check("pdf: existing build/resume.pdf is well-formed",
+          not bi, "\n        ".join(bi) if bi else "")
+else:
+    print("[skip] build/resume.pdf not present -- skipping on-disk PDF check")
 
 # ---------------------------------------------------------------- summary
 print("\n" + "=" * 50)
