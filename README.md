@@ -91,7 +91,8 @@ being wrapped in an empty bullet list.
 | `scripts/md2tex.py` | Markdown → LaTeX converter (also writes `build/clean-*.md`). |
 | `scripts/watch.sh` | Zero-dependency file watcher that rebuilds on save. |
 | `scripts/test_md2tex.py` | Test suite for the converter + PDF validity (`python3 scripts/test_md2tex.py`). |
-| `scripts/pdf_valid.py` | Structural PDF check. Runs async after every latexmk success (`.latexmkrc`). Manual: `python3 scripts/pdf_valid.py build/resume.pdf`. |
+| `scripts/pdf_valid.py` | Structural PDF check (async after latexmk). If valid → `ready/resume-<timestamp>.pdf`; if invalid → leaves `ready/` alone. |
+| `ready/` | Send-ready PDFs only (gitignored), max 10 timestamped copies per name. Prefer these over `build/`. |
 | `resumes/resume.tex` | **Generated** from `resumes/resume.md` on each build — don't edit by hand. |
 | `resume-dirty.tex` | Full archive of alternate bullet phrasings, kept as LaTeX comments. |
 | `.vscode/tasks.json` | Auto-starts the watcher when the folder is opened. |

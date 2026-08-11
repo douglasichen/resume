@@ -407,6 +407,73 @@ with tempfile.TemporaryDirectory() as d:
     PV.check_file(bad_path)
     check("pdf: success clears prior .INVALID marker",
           not os.path.exists(PV.marker_path(bad_path)))
+    # Non-build/ paths must not write ready/ (avoids polluting the repo in tests).
+    check("pdf: non-build path does not publish ready/",
+          PV.ready_dir_for(good_path) is None
+          and PV.publish_ready(good_path, good) is None)
+
+# ready/: only update on valid build/*.pdf
+from datetime import datetime
+with tempfile.TemporaryDirectory() as d:
+    build_dir = os.path.join(d, "build")
+    ready_dir = os.path.join(d, "ready")
+    os.makedirs(build_dir)
+    good_build = os.path.join(build_dir, "resume.pdf")
+    open(good_build, "wb").write(good)
+    when = datetime(2026, 7, 28, 12, 34, 56)
+    dest = PV.publish_ready(good_build, good, when=when)
+    want = os.path.join(ready_dir, "resume-20260728-123456.pdf")
+    eq("ready: path is ready/resume-<timestamp>.pdf", dest, want)
+    check("ready: file written with valid bytes",
+          os.path.isfile(want) and open(want, "rb").read() == good)
+    # Invalid must not create/update ready/
+    bad_build = os.path.join(build_dir, "resume.pdf")
+    open(bad_build, "wb").write(corrupt)
+    # Simulate check_file failure path: publish_ready is simply not called.
+    # Ensure a pre-existing ready file is left alone by check_file on invalid.
+    rc = PV.check_file(bad_build)
+    check("ready: invalid check_file exits 1", rc == 1)
+    check("ready: invalid does not delete prior ready copy",
+          os.path.isfile(want) and open(want, "rb").read() == good)
+    # No newer ready file from the failed check
+    ready_files = sorted(os.listdir(ready_dir)) if os.path.isdir(ready_dir) else []
+    check("ready: invalid adds no new ready files",
+          ready_files == ["resume-20260728-123456.pdf"], ready_files)
+
+# ready/: prune to READY_MAX_COPIES (newest kept).
+with tempfile.TemporaryDirectory() as d:
+    build_dir = os.path.join(d, "build")
+    ready_dir = os.path.join(d, "ready")
+    os.makedirs(build_dir)
+    os.makedirs(ready_dir)
+    good_build = os.path.join(build_dir, "resume.pdf")
+    open(good_build, "wb").write(good)
+    # Seed 12 older snapshots, then publish one more → should end at max 10.
+    for i in range(12):
+        name = f"resume-20260728-{i:02d}0000.pdf"
+        open(os.path.join(ready_dir, name), "wb").write(b"old")
+    dest = PV.publish_ready(
+        good_build, good, when=datetime(2026, 7, 28, 23, 59, 59))
+    remaining = sorted(os.listdir(ready_dir))
+    check("ready: queue cap at READY_MAX_COPIES",
+          len(remaining) == PV.READY_MAX_COPIES,
+          f"count={len(remaining)} files={remaining}")
+    check("ready: queue keeps newest (back of queue)",
+          "resume-20260728-235959.pdf" in remaining, remaining)
+    check("ready: queue drops oldest first (front of queue)",
+          "resume-20260728-000000.pdf" not in remaining
+          and "resume-20260728-010000.pdf" not in remaining
+          and "resume-20260728-020000.pdf" not in remaining,
+          remaining)
+    # Direct prune: keep=2 → only the two newest remain
+    rem = PV.prune_ready(ready_dir, "resume", keep=2)
+    left = sorted(os.listdir(ready_dir))
+    check("ready: FIFO prune keep=2 leaves two newest",
+          left == sorted(remaining)[-2:], left)
+    check("ready: FIFO prune removed the older ones first",
+          len(rem) == PV.READY_MAX_COPIES - 2
+          and all(os.path.basename(p) < left[0] for p in rem),
+          f"rem={[os.path.basename(p) for p in rem]} left={left}")
 
 # --async must return immediately with 0 and still produce the check result.
 with tempfile.TemporaryDirectory() as d:

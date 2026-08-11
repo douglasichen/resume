@@ -1,6 +1,9 @@
 # All compiled output (PDF + aux files) goes here via .latexmkrc ($out_dir = 'build')
 build/
 
+# Validated send-ready PDFs (build/resume.pdf → ready/resume-<timestamp>.pdf only if valid)
+ready/
+
 # Sidecar written by scripts/pdf_valid.py when a PDF fails structural checks
 *.pdf.INVALID
 

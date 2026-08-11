@@ -7,6 +7,9 @@ startxref/%%EOF, so the final trailer points into a stream.
 
 Wired into every latexmk success via .latexmkrc (async — does not slow rebuilds).
 
+On success for build/<name>.pdf, also copies to ready/<name>-<timestamp>.pdf
+(only when valid — an invalid build never touches ready/).
+
 Usage:
     python3 pdf_valid.py path/to/file.pdf          # exit 0 ok, 1 bad
     python3 pdf_valid.py --async path/to/file.pdf  # spawn check in background, exit 0
@@ -17,6 +20,7 @@ import os
 import re
 import subprocess
 import sys
+from datetime import datetime
 
 
 def pdf_issues(data: bytes) -> list[str]:
@@ -94,6 +98,91 @@ def marker_path(pdf_path: str) -> str:
     return pdf_path + ".INVALID"
 
 
+def ready_dir_for(pdf_path: str) -> str | None:
+    """Return <repo>/ready if pdf_path is under <repo>/build/, else None.
+
+    ready/ is only updated for real build outputs — unit-test temp PDFs are ignored.
+    """
+    abs_p = os.path.abspath(pdf_path)
+    parent = os.path.dirname(abs_p)
+    if os.path.basename(parent) != "build":
+        return None
+    return os.path.join(os.path.dirname(parent), "ready")
+
+
+# ready/ is a FIFO queue of sendable PDFs: push on valid build, pop oldest
+# when over capacity so we never pile up dozens of copies.
+READY_MAX_COPIES = 10
+
+
+def ready_pdf_path(pdf_path: str, when: datetime | None = None) -> str | None:
+    """Path for ready/<stem>-YYYYMMDD-HHMMSS.pdf, or None if not a build/ PDF."""
+    rdir = ready_dir_for(pdf_path)
+    if rdir is None:
+        return None
+    when = when or datetime.now()
+    stem = os.path.splitext(os.path.basename(pdf_path))[0]
+    ts = when.strftime("%Y%m%d-%H%M%S")
+    return os.path.join(rdir, f"{stem}-{ts}.pdf")
+
+
+def prune_ready(ready_dir: str, stem: str, keep: int = READY_MAX_COPIES) -> list[str]:
+    """FIFO: if more than `keep` ready/<stem>-*.pdf, delete oldest first.
+
+    Timestamped names (YYYYMMDD-HHMMSS) sort oldest→newest as text. Returns
+    paths that were removed (front of the queue).
+    """
+    if keep < 0 or not os.path.isdir(ready_dir):
+        return []
+    prefix = stem + "-"
+    files = []
+    for name in os.listdir(ready_dir):
+        if not (name.startswith(prefix) and name.endswith(".pdf")):
+            continue
+        if name.endswith(".tmp"):
+            continue
+        files.append(os.path.join(ready_dir, name))
+    # Oldest first = queue order; pop from the front until len <= keep.
+    files.sort(key=os.path.basename)
+    overflow = len(files) - keep
+    removed: list[str] = []
+    for old in files[: max(overflow, 0)]:
+        try:
+            os.remove(old)
+            removed.append(old)
+        except OSError:
+            pass
+    return removed
+
+
+def publish_ready(pdf_path: str, data: bytes, when: datetime | None = None) -> str | None:
+    """Push a valid PDF onto the ready/ FIFO queue. Returns dest path, or None.
+
+    Never called on invalid PDFs — callers must only invoke after validation passes.
+    Atomic write (tmp + replace) so a partial copy cannot look "ready".
+    After push, pops oldest copies until at most READY_MAX_COPIES remain.
+    """
+    dest = ready_pdf_path(pdf_path, when=when)
+    if dest is None:
+        return None
+    ready_dir = os.path.dirname(dest)
+    stem = os.path.splitext(os.path.basename(pdf_path))[0]
+    os.makedirs(ready_dir, exist_ok=True)
+    tmp = dest + ".tmp"
+    with open(tmp, "wb") as f:
+        f.write(data)
+        f.flush()
+        os.fsync(f.fileno())
+    os.replace(tmp, dest)  # push newest
+    removed = prune_ready(ready_dir, stem, keep=READY_MAX_COPIES)  # pop oldest
+    if removed:
+        sys.stdout.write(
+            f"[pdf-valid] ready/ queue: dropped {len(removed)} oldest "
+            f"(cap {READY_MAX_COPIES})\n"
+        )
+    return dest
+
+
 def _notify_macos(title: str, body: str) -> None:
     """Best-effort desktop notification (macOS). Silent no-op elsewhere."""
     if sys.platform != "darwin":
@@ -132,9 +221,11 @@ def check_file(path: str) -> int:
                     f.write(f"  - {issue}\n")
         except OSError:
             pass
+        # Do NOT touch ready/ — last good ready/<name>-<timestamp>.pdf stays.
         sys.stderr.write(
             f"\n[pdf-valid] *** INVALID PDF — do not send this file out ***\n"
             f"[pdf-valid] {path}\n"
+            f"[pdf-valid] ready/ not updated (still has last valid copy, if any)\n"
         )
         for issue in issues:
             sys.stderr.write(f"[pdf-valid]   - {issue}\n")
@@ -150,13 +241,20 @@ def check_file(path: str) -> int:
         )
         return 1
 
-    # Clean success: drop any prior failure marker.
+    # Clean success: drop any prior failure marker, then promote to ready/.
     try:
         if os.path.exists(mark):
             os.remove(mark)
     except OSError:
         pass
     sys.stdout.write(f"[pdf-valid] {path}: ok ({len(data)} bytes)\n")
+    try:
+        dest = publish_ready(path, data)
+        if dest is not None:
+            sys.stdout.write(f"[pdf-valid] ready copy: {dest}\n")
+    except OSError as e:
+        sys.stderr.write(f"[pdf-valid] failed to write ready/ copy: {e}\n")
+        # Validation itself passed; ready/ failure is non-fatal for exit code.
     return 0
 
 

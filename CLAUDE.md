@@ -21,7 +21,9 @@ resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ─�
 - **`scripts/pdf_valid.py`** — rejects PDFs with junk after `%%EOF` / broken xref.
   Runs **async after every successful latexmk** via `.latexmkrc` `$success_cmd`
   (watch, CLI, LaTeX Workshop). On failure: loud log + macOS notification +
-  `build/<name>.pdf.INVALID` sidecar — do not send that PDF out.
+  `build/<name>.pdf.INVALID` sidecar — do not send that PDF out. On success:
+  copies to **`ready/<name>-YYYYMMDD-HHMMSS.pdf`** and keeps at most **10**
+  copies per name (oldest pruned). Invalid builds never touch `ready/`.
 - **`resumes/resume.tex`** — **generated** from `resumes/resume.md` on every build. Do
   **not** edit by hand; changes get overwritten on the next rebuild.
 - **`resume-dirty.tex`** — archive of alternate bullet phrasings kept as LaTeX comments.
