@@ -23,7 +23,7 @@
 - Developed web scrapers using JavaScript & Puppeteer to automate the collection of **1M+** insurance claims
 
 ### Software Consultant | Self-employed | Sep 2024 -- Oct 2024
-- Secured a **$5K** contract to automate insurance workflows by building software to extract data from PDF documents
+- Secured a **$5K contract** to automate insurance workflows by building software to extract data from PDF documents
 - Engineered a semantic-chunking algorithm that improved data extraction accuracy from **78% to 96%** on large PDFs
 
 ### Software Engineer Intern | Exchange Solutions [Project Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
