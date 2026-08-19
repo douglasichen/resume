@@ -4,22 +4,24 @@
 - github.com/douglasichen | https://www.github.com/douglasichen
 
 ## Education
-### University of British Columbia | Vancouver, BC | Bachelor of Science in Computer Science, Co-op program, GPA: 3.7/4.0 | Sep 2023 -- Apr 2028
+### University of British Columbia | Vancouver, BC | Bachelor of Science in Computer Science (Co-op), GPA: 4.0, Dean's Honour List | Sep 2023 -- Apr 2028
 - Courses: Object-Oriented Design, Algorithms & Data Structures, Operating Systems, Databases, Machine Learning
 
 ## Work Experience
 ### Software Engineer Intern | NimbleRx (YC W15, Acquired) | May 2026 -- Aug 2026
 <!-- - Sped up a search query for duplicate customer tickets by **50x** by implementing vector search across embeddings -->
-- Engineered context harness for AI code review agent processing **290+ PRs/week**, flagging merge blockers in CI
-<!-- - Identified and patched a login enumeration vulnerability, closing an exposure across an **11M**-user account base -->
+<!-- - Architected an AI auto-triage pipeline with Claude API to resolve **600+ monthly support cases**, enhancing triage **accuracy from 58% to 92%** by iterating on negative feedback through improving the in-house agentic memory layer, DB/data-lake context-gathering tools and LLM-tuning -->
+- Architected an AI auto-triage pipeline with Claude API to evaluate and resolve **600+ monthly support cases**, improving triage **accuracy from 58% to 92%** by reducing the number of false assumptions through LLM-tuning
+- Engineered context harness for AI code review agent processing **290+ PRs/week**, ensuring product spec, engineering design, and implementation stay in sync by flagging drift as merge blockers in CI
 - Built repeatable regression tests for **6 AI features** using cosine similarity between vector embeddings and an LLM judge to tolerate semantically equivalent outputs
+<!-- - Identified and patched a login enumeration vulnerability, closing an exposure across an **11M**-user account base -->
 <!-- - Developed Spring Boot services and AI Agent to automatically triage customer tickets in under **150 seconds** -->
 - Patched a login-enumeration vulnerability by enforcing byte-identical API responses for invalid email/password, protecting **11M user accounts** from being identified by attackers
 
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Unblocked web scrapers stopped by 2FA by building AWS infrastructure to process **53K emails/month** and route verification codes through Redis
 <!-- - Unblocked web scrapers stopped by 2FA by building infra to process **53K emails/month** and route verification codes -->
-- Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by **19x**
+- Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by **94%**
 - Developed web scrapers using JavaScript & Puppeteer to automate the collection of **1M+** insurance claims
 
 ### Software Consultant | Self-employed | Sep 2024 -- Oct 2024
@@ -50,7 +52,5 @@
 
 ## Skills
 - Languages: TypeScript/JavaScript, Python, Java, C++, SQL, HTML/CSS, Shell Script
-- Frameworks: React, Next.js, Node.js, Express, Spring, Vite, Jest, Puppeteer, Playwright
+- Frameworks: React, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright
 - Cloud/Infra: AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker
-- DevOps: Git, GitHub Actions, Bitbucket Pipelines
-- AI/ML: AI Agents, RAG, Vector Search & Embeddings
