@@ -56,3 +56,4 @@
 - Frameworks: React, React Native, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright
 - Cloud/Infra: AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker
 - AI: Claude API, Gemini API, OpenAI API, Embedding Models, Vector Search, LLM Evaluation, AI Agents
+- Concepts: Linux, System Design, CI/CD, DevOps, Backend, Agile, Test-Driven Development, RESTful APIs, Networking
