@@ -16,6 +16,12 @@ resumes/resume.md  ──(scripts/md2tex.py)──▶  resumes/resume.tex  ─�
 - **`scripts/md2tex.py`** — converts `resumes/resume.md` → LaTeX (+ clean markdown). The
   preamble + macros are baked in; output is verified pixel-identical to the original
   hand-written resume.
+- **`scripts/build_resume.py`** — CLI for one-off variants: compiles *any* `.md` to a PDF at
+  *any* path (`python3 scripts/build_resume.py <in.md> <out.pdf>`), prints `OK:`/`FAIL:` and
+  exits 0/1 (`--json` for callers, `--max-pages N` page limit, default 1). Compiles in a temp
+  dir, so `resumes/`, `build/`, and `ready/` are never touched and a failed build leaves no
+  PDF at the destination. Used by internships-auto-apply for per-job tailored resumes, which
+  land in `tailored/` (gitignored).
 - **`scripts/watch.sh`** — zero-dependency watcher: on save, runs `md2tex.py` + `latexmk`.
 - **`scripts/test_md2tex.py`** — test suite for the converter + PDF structural validity.
 - **`scripts/pdf_valid.py`** — rejects PDFs with junk after `%%EOF` / broken xref.
@@ -85,6 +91,7 @@ If `latexmk` is "not found", MacTeX isn't on your PATH — restart the terminal,
 
 ```sh
 python3 scripts/test_md2tex.py
+python3 scripts/test_build_resume.py
 ```
 
 Covers escaping, bold, links, field parsing, section dispatch, spacing directives,
@@ -93,7 +100,8 @@ end-to-end LaTeX compilation, and PDF structural validity (`scripts/pdf_valid.py
 ## Editing / template notes
 
 - Keep it to **one page**. After editing, confirm `pdfinfo build/resume.pdf` still
-  reports `Pages: 1`.
+  reports `Pages: 1`. `build_resume.py` enforces this for variants and fails the build
+  rather than emitting a 2-page PDF — the usual cause is dropped `: \vspace{...}` lines.
 - Bullets must each fit on **one rendered line** — long bullets silently wrap. When in
   doubt, build and eyeball the PDF (or measure against the ~507pt line width).
 - Based on the [Jake Gutierrez résumé template](https://github.com/sb2nov/resume) (MIT).

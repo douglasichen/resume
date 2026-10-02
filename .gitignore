@@ -1,6 +1,9 @@
 # All compiled output (PDF + aux files) goes here via .latexmkrc ($out_dir = 'build')
 build/
 
+# Per-job tailored variants written by scripts/build_resume.py (md + pdf)
+tailored/
+
 # Validated send-ready PDFs (build/resume.pdf → ready/resume-<timestamp>.pdf only if valid)
 ready/
 
