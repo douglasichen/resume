@@ -21,7 +21,8 @@
 ### Software Engineer Intern | InsideDesk | Jan 2025 -- Aug 2025
 - Unblocked web scrapers stopped by 2FA by building AWS infrastructure to process **53K emails/month** and route verification codes through Redis
 <!-- - Unblocked web scrapers stopped by 2FA by building infra to process **53K emails/month** and route verification codes -->
-- Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by **94%**
+- Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by **92%**
+- Analyzed production CloudWatch logs to diagnose and fix a race condition causing silent web scraping failures, increasing data collection success rate from **57% to 94%**
 - Developed web scrapers using JavaScript & Puppeteer to automate the collection of **1M+** insurance claims
 
 ### Software Consultant | Self-employed | Sep 2024 -- Oct 2024
@@ -52,5 +53,6 @@
 
 ## Skills
 - Languages: TypeScript/JavaScript, Python, Java, C++, SQL, HTML/CSS, Shell Script
-- Frameworks: React, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright
+- Frameworks: React, React Native, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright
 - Cloud/Infra: AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker
+- AI: Claude API, Gemini API, OpenAI API, Embedding Models, Vector Search, LLM Evaluation, AI Agents

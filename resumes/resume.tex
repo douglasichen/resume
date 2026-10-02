@@ -52,7 +52,8 @@
 
 \newcommand{\resumeItem}[1]{
   \item\small{
-    {#1\vspace{-0.6pt}}
+    \setlength{\baselineskip}{11.0pt}
+    {#1\par\vspace{1.3pt}}
   }
 }
 
@@ -152,7 +153,8 @@
     \resumeSubheadingB{Software Engineer Intern}{Jan 2025 -- Aug 2025}{InsideDesk}
       \resumeItemListStart
         \resumeItem{Unblocked web scrapers stopped by 2FA by building AWS infrastructure to process \textbf{53K emails/month} and route verification codes through Redis}
-        \resumeItem{Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by \textbf{94\%}}
+        \resumeItem{Resolved a QA bottleneck by writing Python scripts to generate test data, reducing manual processing time by \textbf{92\%}}
+        \resumeItem{Analyzed production CloudWatch logs to diagnose and fix a race condition causing silent web scraping failures, increasing data collection success rate from \textbf{57\% to 94\%}}
         \resumeItem{Developed web scrapers using JavaScript \& Puppeteer to automate the collection of \textbf{1M+} insurance claims}
       \resumeItemListEnd
     \resumeSubheadingB{Software Consultant}{Sep 2024 -- Oct 2024}{Self-employed}
@@ -199,8 +201,9 @@
  \begin{itemize}[leftmargin=0.15in, label={}]
     \small{\item{
          \textbf{Languages:}{ TypeScript/JavaScript, Python, Java, C++, SQL, HTML/CSS, Shell Script} \\
-     \textbf{Frameworks:}{ React, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright} \\
-     \textbf{Cloud/Infra:}{ AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker}
+     \textbf{Frameworks:}{ React, React Native, Next.js, Node.js, Express, Spring Boot, Vite, Jest, Puppeteer, Playwright} \\
+     \textbf{Cloud/Infra:}{ AWS (Lambda, S3, SQS, DynamoDB, Bedrock, API Gateway, CDK), PostgreSQL, Redis, Docker} \\
+     \textbf{AI:}{ Claude API, Gemini API, OpenAI API, Embedding Models, Vector Search, LLM Evaluation, AI Agents}
     }}
  \end{itemize}
 \end{document}
