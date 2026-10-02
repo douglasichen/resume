@@ -29,15 +29,15 @@
 - Secured a **$5K contract** to automate insurance workflows by building software to extract data from PDF documents
 - Engineered a semantic-chunking algorithm that improved data extraction accuracy from **78% to 96%** on large PDFs
 
-### Software Engineer Intern | Exchange Solutions [Project Demo](https://www.youtube.com/watch?v=mMaEmro4iEw) | May 2024 -- Aug 2024
-- Built a mobile app prototyping tool for **60+ stakeholders** using React Native and JavaScript
+### Software Engineer Intern | Exchange Solutions | May 2024 -- Aug 2024
+- Built a mobile app prototyping tool for **60+ stakeholders** using Claude API, React Native, and JavaScript
 - First intern to earn a **Bravo Certificate for Innovation** from senior management after demoing to **100+** co-workers
 <!-- : \vspace{-10pt} -->
 
 ## Personal Projects
-### Resume Fact-Checker | TypeScript, Node.js, React, Vite, AWS CDK, Tavily, Reducto, Resend | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
+### Resume Fact-Checker | TypeScript, Node.js, React, Vite, AWS CDK, Lambda, S3, DynamoDB | [Code](https://github.com/douglasichen/resume-bs-detector) [Launch Post](https://www.linkedin.com/feed/update/urn:li:activity:7424145830577729536/)
 - Launched an AI agent to fact-check resumes against internet sources; reached **1.5K registered users** in 24 hours
-- Built a serverless infrastructure to parse, store, and verify **1.8K resumes** using AWS Lambda, S3, and DynamoDB
+- Built and deployed serverless infrastructure with REST APIs to parse, store, and verify **1.8K resumes** on AWS
 
 ### Free Food @ UBC | TypeScript, React, Vite, AWS (Lambda, SQS, DynamoDB, Bedrock & API Gateway) | [Code](https://github.com/douglasichen/ubceventscdk)
 - Developed a platform to combat food insecurity for students by aggregating events with free food from **400+ orgs**
